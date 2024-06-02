@@ -28,18 +28,17 @@ header {
     padding-top: 100px;
 }
 .button {
-    width: 350px;
-    height: 400px;
     background-color: #A6C9C5;
-    color: #ffffff;
-    size: 50px;
+    color: #000000;
+margin-top: 175px;
     font-size: xx-large;
     text-align: center;
-    line-height: 400px;
+
     font-weight: bold;
     cursor: pointer;
 }
 a{
+    
     text-decoration: none;
 }
 .div1{
@@ -60,12 +59,21 @@ hr {
 .buttonadmin {
     width: 350px;
     height: 400px;
-    background-color: #40798c;
-    color: #ffffff;
+    background-color: #A6C9C5;
+    color: #000000;
     size: 50px;
     font-size: xx-large;
     text-align: center;
     line-height: 400px;
     font-weight: bold;
     cursor: pointer;
+}
+.div2{
+   
+    width: 350px;
+    height: 400px;
+    margin-top: 120px;
+    background-color: #A6C9C5;
+    display: flex;
+    justify-content: center;
 }

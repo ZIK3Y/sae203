@@ -4,8 +4,8 @@
 <link rel="stylesheet" href="../style/menu.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon Site</title>
-   
+    <title>UniNote</title>
+    <link rel="icon" href="../ressources/Logo.png" type="image/x-icon">
 <body>
     <header>
         <img src="../ressources/image/Logo.png" alt="Logo de l'entreprise" class="logo">
