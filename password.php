@@ -9,11 +9,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $niv_perm = $_POST['perm'];
     $mdp = $_POST['mdp'];
 
+    $hashedPassword = password_hash($mdp, PASSWORD_DEFAULT);
+
     $passman = $pdo->prepare('INSERT INTO compte VALUES (:id, :nom, :prenom, :password, :niv_perm)');
     $passman->bindParam(':id', $id);
     $passman->bindParam(':nom', $nom);
     $passman->bindParam(':prenom', $prenom);
-    $passman->bindParam(':password', password_hash($mdp, PASSWORD_DEFAULT));
+    $passman->bindParam(':password', $hashedPassword);
     $passman->bindParam(':niv_perm', $niv_perm);
     $passman->execute();
 }
