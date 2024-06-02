@@ -54,10 +54,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 header('Location: eleves/menu.php');
                 break;
             case 2:
-                header('Location: admin/menu.php');
+                header('Location: enseignant/notes.php');
                 break;
             case 3:
-                header('Location: enseignant/menu.php');
+                header('Location: admin/menu.php');
                 break;
             default:
                 $error = "Niveau de permission inconnu";
