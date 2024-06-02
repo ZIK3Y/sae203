@@ -8,7 +8,7 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    background-color: #A6C9C5;
+    background-color: #DDEAD7;
 }
 
 .logo {
@@ -28,7 +28,7 @@ header {
     padding-top: 100px;
 }
 .button {
-    background-color: #A6C9C5;
+    background-color: #DDEAD7;
     color: #000000;
 margin-top: 175px;
     font-size: xx-large;
@@ -44,23 +44,17 @@ a{
 .div1{
     width: 350px;
     height: 400px;
-    margin-top: 50px;
-    background-color: #A6C9C5;
+    margin-top: 200px;
+    background-color: #DDEAD7;
     display: flex;
     justify-content: center;
     border-radius: 5px;
 }
-hr {
-    height: 2px; 
-    background-color: #000000; 
-    margin-top: 90px; 
-    margin-bottom: 20px; 
-    width: 400px;
-}
+
 .buttonadmin {
     width: 350px;
     height: 400px;
-    background-color: #A6C9C5;
+    background-color: #DDEAD7;
     color: #000000;
     size: 50px;
     font-size: xx-large;
@@ -70,11 +64,42 @@ hr {
     cursor: pointer;
 }
 .div2{
-    border-radius: 5px;
+   
     width: 350px;
     height: 400px;
-    margin-top: 120px;
-    background-color: #A6C9C5;
+    border-radius: 5px;
+    background-color: #DDEAD7;
     display: flex;
     justify-content: center;
+}
+
+.divC {
+    width: 100px;
+    height: 40px;
+    margin-top: -150px;
+    background-color: #EEEEEE;
+    display: flex;
+    justify-content: center;
+    padding: auto;
+    border-radius: 5px;
+}
+
+.C {
+    color: #000000;
+    font-size: 20px;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 10px 20px;
+}
+
+.buttoncontainC{
+    display: flex;
+    justify-content: space-evenly;
+    padding-left: 650px;
+    padding-right: 650px;
+    border-radius: 12px;
+    background-color: #EEEEEE;
+    border: #000000 3px;
+    border-radius: 12px;
 }

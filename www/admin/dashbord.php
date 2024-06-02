@@ -17,7 +17,7 @@
     </div>
       
         <div class="div2">
-        <a href="gerer_ressource.php" class="button">Modifier les ressources</a>
+        <a href="gerer_classes.php" class="button">Modifier les<br> Classes</a>
         </div>
         <div class="div1">
         <a href="gerer_etudiant.php" class="button">Modifier les <br>
