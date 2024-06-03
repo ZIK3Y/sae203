@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<link rel="stylesheet" href="./gerer_enseignant.css">
+<link rel="stylesheet" href="../../style/admin/gerer_enseignant.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UniNote</title>

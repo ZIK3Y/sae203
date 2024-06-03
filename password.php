@@ -27,8 +27,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style/password.css">
+
     <title>Account Manager</title>
 <body>
+<header>
+        <div class="headermain">
+            <div class="img0">
+                <img src="./ressources/image/Logo.png" alt="Logo de l'entreprise" class="logo">
+            </div>
+     
+            <div id="list">
+                <ul>
+               <li><a href="www/admin/dashbord.php" class="button-23">Admin Dashbord</a></li>
+               <li> <a href="www/admin/gerer_etudiant.php" class="button-23">Gérer les étudiants</a></li>
+               <li> <a href="www/admingerer_classes.php" class="button-23">Gérer les classes</a></li> 
+                </ul>
+            </div>
+        
+            <div class="img1">
+                <img src="./ressources/image/personne.png" alt="Photo de profil" class="profile-pic">
+            </div>
+        </div>
+    </header>
     <form action="password.php" method="post">
         <table>
             <tr>

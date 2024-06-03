@@ -51,13 +51,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         switch ($user['niv_perm']) {
             case 1:
-                header('Location: eleves/menu.php');
+                header('Location: Eleve/AcceuilEleve.php');
                 break;
             case 2:
-                header('Location: enseignant/notes.php');
+                header('Location: enseignant/AccueilEnseignant.php');
                 break;
             case 3:
-                header('Location: admin/menu.php');
+                header('Location: admin/dashbord.php');
                 break;
             default:
                 $error = "Niveau de permission inconnu";

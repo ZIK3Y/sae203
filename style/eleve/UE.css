@@ -1,0 +1,182 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,400&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #DDEAD7;
+}
+
+header {
+    background-color: #ffffff;
+    padding: 10px 0;
+    position: relative;
+    height: 150px;
+}
+
+.headermain {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.img0 {
+    position: absolute;
+    left: 20px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.img1-container {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    position: relative;
+}
+
+.profile-pic {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    margin-top: 20px;
+}
+
+#list {
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: center;
+}
+
+#list ul {
+    display: flex;
+    list-style-type: none;
+}
+
+#list ul li {
+    margin: 0 120px;
+}
+
+.button-23 {
+    padding: 15px 30px;
+    background-color: #DDEAD7;
+    color: #000000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.button-23:hover {
+    background-color: #EEEEEE;
+}
+
+.logo {
+    height: 150px;
+    width: auto;
+}
+.button-22 {
+    margin-top: 5px;
+    padding: 15px 30px;
+    background-color: #DDEAD7;
+    color: #000000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-evenly;
+    padding-left: 200px;
+    padding-right: 200px;
+    padding-top: 100px;
+}
+
+.button {
+    background-color: #DDEAD7;
+    color: #000000;
+    margin-top: 175px;
+    font-size: xx-large;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+}
+
+.div1, .div2 {
+    width: 300px;
+    height: 300px;
+    margin-top: 65px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1px;
+    text-align: center;
+}
+
+.buttonadmin {
+    width: 350px;
+    height: 400px;
+    background-color: #DDEAD7;
+    color: #000000;
+    size: 50px;
+    font-size: xx-large;
+    text-align: center;
+    line-height: 400px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.button-container2 {
+    display: flex;
+    justify-content: space-evenly;
+    padding-left: 400px;
+    padding-right: 400px;
+    padding-top: 100px;
+}
+
+.A {
+    color: #000000;
+    font-weight: bold;
+    font-size: 24px;
+    margin-top: -45px;
+    margin-left: -10px;
+}
+
+.red {
+    color: #FF0000;
+}
+
+.green {
+    color: #33693F;
+}
+
+.black {
+    color: #000000;
+}
+
+.Important {
+    font-size: 140px;
+    display: flex;
+    justify-content: center;
+    margin-left: -10px;
+    margin-top: -35px;
+}

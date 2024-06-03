@@ -84,6 +84,7 @@ header {
     width: auto;
 }
 .button-22 {
+    margin-top: 5px;
     padding: 15px 30px;
     background-color: #40798c;
     color: #000000;
@@ -94,6 +95,8 @@ header {
     font-weight: bold;
     text-decoration: none;
 }
+
+/* tout le header  */
 .div46{
 
     margin-top: 80px;
@@ -101,14 +104,14 @@ header {
 }
 .div45{
 
-    margin-top: 10px;
+    margin-top: 20px;
     margin-left: 100px;
 }
 .styled-table {
     width: 80%;
-    margin: 20px auto;
+    margin: 40px auto;
     overflow-x: auto;
-    
+ 
 }
 table {
     width: 100%;
@@ -126,3 +129,61 @@ th {
 tr:nth-child(even) {
     background-color: #f9f9f9;
 }
+.divbouton{
+    display: flex;
+    justify-content: space-around;
+}
+
+
+
+.boutonsupprimer {
+  appearance: none;
+  background-color: #eeeeee;
+  border: 1px solid rgba(27, 31, 35, .15);
+  border-radius: 6px;
+  box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+  box-sizing: border-box;   
+  color: #000000;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  padding: 6px 16px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+.boutonmodifier {
+    appearance: none;
+    background-color: #40798c;
+    border: 1px solid rgba(27, 31, 35, .15);
+    border-radius: 6px;
+    box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+    box-sizing: border-box;   
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: -apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    padding: 6px 16px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+
+
+
