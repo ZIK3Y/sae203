@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : dim. 02 juin 2024 à 00:55
--- Version du serveur : 10.4.32-MariaDB
--- Version de PHP : 8.0.30
+-- Généré le : ven. 07 juin 2024 à 17:09
+-- Version du serveur : 10.4.28-MariaDB
+-- Version de PHP : 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,12 +28,19 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `compte` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(30) DEFAULT NULL,
   `prenom` varchar(30) DEFAULT NULL,
   `password` text DEFAULT NULL,
   `niv_perm` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `compte`
+--
+
+INSERT INTO `compte` (`id`, `nom`, `prenom`, `password`, `niv_perm`) VALUES
+(1, 'AL SALTI', 'Nadia', '$2y$10$By240eFJbhk4CaeIwptnTukvdES/oA1YmXPhXAk2qXaKIC71mYWFG', 2);
 
 -- --------------------------------------------------------
 
@@ -46,6 +53,13 @@ CREATE TABLE `enseignants` (
   `num_tel` int(11) DEFAULT NULL,
   `mail` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `enseignants`
+--
+
+INSERT INTO `enseignants` (`id_ens`, `num_tel`, `mail`) VALUES
+(1, 600000000, 'rien@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -65,12 +79,19 @@ CREATE TABLE `etudiant` (
 --
 
 CREATE TABLE `eval` (
-  `id_eval` int(11) NOT NULL,
+  `id_eval` int(11) NOT NULL AUTO_INCREMENT,
   `id_ressource` int(11) DEFAULT NULL,
   `coeff` float DEFAULT NULL,
   `intitule` varchar(50) DEFAULT NULL,
   `date` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `eval`
+--
+
+INSERT INTO `eval` (`id_eval`, `id_ressource`, `coeff`, `intitule`, `date`) VALUES
+(0, 1, 2, 'Compréhension orale', '2024-06-07 17:08:11');
 
 -- --------------------------------------------------------
 
@@ -82,6 +103,13 @@ CREATE TABLE `matiereens` (
   `id_ressource` int(11) NOT NULL,
   `id_ens` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `matiereens`
+--
+
+INSERT INTO `matiereens` (`id_ressource`, `id_ens`) VALUES
+(1, 1);
 
 -- --------------------------------------------------------
 
@@ -102,10 +130,17 @@ CREATE TABLE `notes` (
 --
 
 CREATE TABLE `promotions` (
-  `id_promo` int(11) NOT NULL,
+  `id_promo` int(11) NOT NULL AUTO_INCREMENT,
   `formation` varchar(50) DEFAULT NULL,
   `annee_forma` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `promotions`
+--
+
+INSERT INTO `promotions` (`id_promo`, `formation`, `annee_forma`) VALUES
+(1, 'BUT MMI 1ere Année', 1);
 
 -- --------------------------------------------------------
 
@@ -114,10 +149,17 @@ CREATE TABLE `promotions` (
 --
 
 CREATE TABLE `ressource` (
-  `id_ressource` int(11) NOT NULL,
+  `id_ressource` int(11) NOT NULL AUTO_INCREMENT,
   `intitule` varchar(50) DEFAULT NULL,
   `ue` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `ressource`
+--
+
+INSERT INTO `ressource` (`id_ressource`, `intitule`, `ue`) VALUES
+(1, 'R101 - Anglais', 1);
 
 -- --------------------------------------------------------
 
@@ -126,7 +168,7 @@ CREATE TABLE `ressource` (
 --
 
 CREATE TABLE `tp` (
-  `id_tp` int(11) NOT NULL,
+  `id_tp` int(11) NOT NULL AUTO_INCREMENT,
   `libelle` varchar(30) DEFAULT NULL,
   `promotion` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -138,10 +180,17 @@ CREATE TABLE `tp` (
 --
 
 CREATE TABLE `ue` (
-  `id_ue` int(11) NOT NULL,
+  `id_ue` int(11) NOT NULL AUTO_INCREMENT,
   `intitule` varchar(50) DEFAULT NULL,
   `id_promo` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `ue`
+--
+
+INSERT INTO `ue` (`id_ue`, `intitule`, `id_promo`) VALUES
+(1, 'Comprendre', 1);
 
 --
 -- Index pour les tables déchargées

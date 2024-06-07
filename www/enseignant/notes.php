@@ -91,7 +91,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <input type="number" class="form-control" id="coeff" name="coeff">
                 </div>
             </div>
-            
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
@@ -102,11 +101,45 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
     </div>
 
-        <input type="button" value="Add">
-        <input type="button" value="Suppr">
-        <input type="button" value="Edit">
-        
-        <input type="submit" value="Valider">
+
+    <div class="container mt-4">
+    <div class="accordion" id="ressourceAccordion">
+        <?php
+            if ($reponse) {
+                foreach ($rows as $ressource) {
+                    $ressourceId = $ressource['id_ressource'];
+                    echo '<div class="accordion-item">';
+                    echo '<h2 class="accordion-header" id="heading' . $ressourceId . '">';
+                    echo '<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse' . $ressourceId . '" aria-expanded="true" aria-controls="collapse' . $ressourceId . '">';
+                    echo $ressource['intitule'];
+                    echo '</button>';
+                    echo '</h2>';
+                    echo '<div id="collapse' . $ressourceId . '" class="accordion-collapse collapse" aria-labelledby="heading' . $ressourceId . '" data-bs-parent="#ressourceAccordion">';
+                    echo '<div class="accordion-body">';
+                    echo '<ul class="list-group">';
+
+                    $requeteEval = "SELECT id_eval, intitule FROM eval WHERE id_ressource = :id_ressource";
+                    $stmtEval = $conn->prepare($requeteEval);
+                    $stmtEval->bindParam(':id_ressource', $ressourceId);
+                    $stmtEval->execute();
+                    $evals = $stmtEval->fetchAll(PDO::FETCH_ASSOC);
+                    if ($evals) {
+                        foreach ($evals as $eval) {
+                            echo '<li class="list-group-item">' . $eval['intitule'] . '</li>';
+                        }
+                    } else {
+                        echo '<li class="list-group-item">Aucune évaluation trouvée.</li>';
+                    }
+                    echo '</ul>';
+                    echo '</div>';
+                    echo '</div>';
+                    echo '</div>';
+                }
+            }
+        ?>
+    </div>
+</div>
+
 
 </body>
 </html>
