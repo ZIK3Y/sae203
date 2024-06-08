@@ -1,0 +1,195 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,400&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #DDEAD7;
+}
+
+header {
+    background-color: #ffffff;
+    padding: 10px 0;
+    position: relative;
+    height: 150px;
+}
+
+.EP {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.img {
+    position: absolute;
+    left: 20px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.IC {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    position: relative;
+}
+
+.photo-profil {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    margin-top: 20px;
+}
+
+#liste {
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: center;
+}
+
+#liste ul {
+    display: flex;
+    list-style-type: none;
+}
+
+#liste ul li {
+    margin: 0 120px;
+}
+
+.bouton-23 {
+    padding: 15px 30px;
+    background-color: #DDEAD7;
+    color: #000000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.bouton-23:hover {
+    background-color: #EEEEEE;
+}
+
+.logo {
+    height: 150px;
+    width: auto;
+}
+
+.C {
+    display: flex;
+    width: 100%;
+    height: 90vh;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.PG, .PD {
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.PG {
+    flex: 0 0 45%;
+    margin-right: 5%;
+}
+
+.PD {
+    flex: 0 0 45%;
+}
+
+.matiere {
+    background-color: white;
+    border: 1px solid black;
+    margin: 10px 0;
+    padding: 20px;
+    cursor: pointer;
+    position: relative;
+}
+
+.matiere.active .devoirs {
+    display: block;
+}
+
+.devoir {
+    background-color: #506c4d;
+    color: white;
+    margin: 5px 0;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.devoir.active {
+    background-color: grey;
+}
+
+.binfo {
+    background-color: white;
+    border: 1px solid black;
+    padding: 20px;
+    margin-top: 20px;
+    width: 100%;
+    text-align: center;
+}
+
+.binfo div {
+    margin: 10px 0;
+}
+
+.dinfo {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.dinfo div {
+    background-color: #f2f2f2;
+    padding: 10px;
+    margin: 5px;
+    width: 25%;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+
+.VN {
+    color: rgb(0, 102, 255);
+    font-weight: bold;
+}
+
+.MC {
+    color: rgb(216, 14, 0);
+    font-weight: bold;
+}
+
+.devoirs {
+    display: none;
+    margin-top: 10px;
+}
+
+.div11{
+    display: flex;
+    justify-content: center;
+}
+
+form {
+    width: 450px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+canvas {
+    max-width: 100%;
+}

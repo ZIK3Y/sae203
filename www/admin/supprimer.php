@@ -1,5 +1,4 @@
 
-
 <?php
 require '../config.php';
 
@@ -10,12 +9,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["id"])) {
     $connect = connexionDB();
 
     try {
-        $stmt = $connect->prepare("DELETE FROM compte WHERE id = :id");
+        $stmt = $connect->prepare("DELETE FROM enseignants WHERE id_ens = :id");
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         if ($stmt->execute()) {
-            echo "Ligne supprimée avec succès.";
+            echo "Informations enseignant supprimées avec succès.";
         } else {
-            echo "Erreur lors de la suppression de la ligne.";
+            echo "Erreur lors de la suppression des informations enseignant.";
         }
     } catch (PDOException $e) {
         echo "Erreur : " . $e->getMessage();

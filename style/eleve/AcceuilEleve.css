@@ -10,11 +10,11 @@ body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #DDEAD7;
+    background-color: #ffffff;
 }
 
 header {
-    background-color: #ffffff;
+    background-color: #DDEAD7;
     padding: 10px 0;
     position: relative;
     height: 150px;

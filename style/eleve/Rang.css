@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,400&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #DDEAD7;
+}
+
+header {
+    background-color: #ffffff;
+    padding: 10px 0;
+    position: relative;
+    height: 150px;
+}
+
+.EP {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.img0 {
+    position: absolute;
+    left: 20px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.IC {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    position: relative;
+}
+
+.photo-profil {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    margin-top: 20px;
+}
+
+#liste {
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: center;
+}
+
+#liste ul {
+    display: flex;
+    list-style-type: none;
+}
+
+#liste ul li {
+    margin: 0 120px;
+}
+
+.bouton-23 {
+    padding: 15px 30px;
+    background-color: #DDEAD7;
+    color: #000000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.bouton-23:hover {
+    background-color: #EEEEEE;
+}
+
+.logo {
+    height: 150px;
+    width: auto;
+}
+
+.C {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 50px;
+    padding: 20px;
+}
+
+.SB {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 20px;
+}
+
+.SA {
+    background-color: white;
+    border: 1px solid black;
+    padding: 20px;
+    text-align: center;
+    font-size: 24px;
+    width: 45%;
+}
+
+.SA-label {
+    display: block;
+    margin-top: 10px;
+    font-size: 16px;
+    color: #555;
+}
+
+.AB {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 800px;
+}
+
+.A {
+    background-color: black;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: 24px;
+    width: 30%;
+}
+
+.A-label {
+    display: block;
+    margin-top: 10px;
+    font-size: 16px;
+    color: #fff;
+}
