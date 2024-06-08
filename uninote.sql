@@ -32,7 +32,8 @@ CREATE TABLE `compte` (
   `nom` varchar(30) DEFAULT NULL,
   `prenom` varchar(30) DEFAULT NULL,
   `password` text DEFAULT NULL,
-  `niv_perm` int(11) DEFAULT NULL
+  `niv_perm` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -49,9 +50,10 @@ INSERT INTO `compte` (`id`, `nom`, `prenom`, `password`, `niv_perm`) VALUES
 --
 
 CREATE TABLE `enseignants` (
-  `id_ens` int(11) NOT NULL,
+  `id_ens` int(11) NOT NULL AUTO_INCREMENT,
   `num_tel` int(11) DEFAULT NULL,
-  `mail` varchar(50) DEFAULT NULL
+  `mail` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id_ens`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -68,8 +70,9 @@ INSERT INTO `enseignants` (`id_ens`, `num_tel`, `mail`) VALUES
 --
 
 CREATE TABLE `etudiant` (
-  `id_etud` int(11) NOT NULL,
-  `tp` varchar(1) DEFAULT NULL
+  `id_etud` int(11) NOT NULL AUTO_INCREMENT,
+  `tp` varchar(1) DEFAULT NULL,
+  PRIMARY KEY (`id_etud`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -83,7 +86,9 @@ CREATE TABLE `eval` (
   `id_ressource` int(11) DEFAULT NULL,
   `coeff` float DEFAULT NULL,
   `intitule` varchar(50) DEFAULT NULL,
-  `date` datetime DEFAULT NULL
+  `date` datetime DEFAULT NULL,
+  PRIMARY KEY (`id_eval`),
+  KEY `id_ressource` (`id_ressource`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -91,7 +96,7 @@ CREATE TABLE `eval` (
 --
 
 INSERT INTO `eval` (`id_eval`, `id_ressource`, `coeff`, `intitule`, `date`) VALUES
-(0, 1, 2, 'Compréhension orale', '2024-06-07 17:08:11');
+(1, 1, 2, 'Compréhension orale', '2024-06-07 17:08:11');
 
 -- --------------------------------------------------------
 
@@ -101,7 +106,9 @@ INSERT INTO `eval` (`id_eval`, `id_ressource`, `coeff`, `intitule`, `date`) VALU
 
 CREATE TABLE `matiereens` (
   `id_ressource` int(11) NOT NULL,
-  `id_ens` int(11) NOT NULL
+  `id_ens` int(11) NOT NULL,
+  PRIMARY KEY (`id_ressource`, `id_ens`),
+  KEY `id_ens` (`id_ens`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -120,7 +127,9 @@ INSERT INTO `matiereens` (`id_ressource`, `id_ens`) VALUES
 CREATE TABLE `notes` (
   `id_eval` int(11) NOT NULL,
   `id_etud` int(11) NOT NULL,
-  `note` int(11) DEFAULT NULL
+  `note` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_eval`, `id_etud`),
+  KEY `id_etud` (`id_etud`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -132,7 +141,8 @@ CREATE TABLE `notes` (
 CREATE TABLE `promotions` (
   `id_promo` int(11) NOT NULL AUTO_INCREMENT,
   `formation` varchar(50) DEFAULT NULL,
-  `annee_forma` int(11) DEFAULT NULL
+  `annee_forma` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_promo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -151,7 +161,9 @@ INSERT INTO `promotions` (`id_promo`, `formation`, `annee_forma`) VALUES
 CREATE TABLE `ressource` (
   `id_ressource` int(11) NOT NULL AUTO_INCREMENT,
   `intitule` varchar(50) DEFAULT NULL,
-  `ue` int(11) DEFAULT NULL
+  `ue` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_ressource`),
+  KEY `ue` (`ue`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -170,7 +182,9 @@ INSERT INTO `ressource` (`id_ressource`, `intitule`, `ue`) VALUES
 CREATE TABLE `tp` (
   `id_tp` int(11) NOT NULL AUTO_INCREMENT,
   `libelle` varchar(30) DEFAULT NULL,
-  `promotion` int(11) DEFAULT NULL
+  `promotion` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_tp`),
+  KEY `promotion` (`promotion`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -182,7 +196,9 @@ CREATE TABLE `tp` (
 CREATE TABLE `ue` (
   `id_ue` int(11) NOT NULL AUTO_INCREMENT,
   `intitule` varchar(50) DEFAULT NULL,
-  `id_promo` int(11) DEFAULT NULL
+  `id_promo` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_ue`),
+  KEY `id_promo` (`id_promo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -191,76 +207,6 @@ CREATE TABLE `ue` (
 
 INSERT INTO `ue` (`id_ue`, `intitule`, `id_promo`) VALUES
 (1, 'Comprendre', 1);
-
---
--- Index pour les tables déchargées
---
-
---
--- Index pour la table `compte`
---
-ALTER TABLE `compte`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `enseignants`
---
-ALTER TABLE `enseignants`
-  ADD PRIMARY KEY (`id_ens`);
-
---
--- Index pour la table `etudiant`
---
-ALTER TABLE `etudiant`
-  ADD PRIMARY KEY (`id_etud`);
-
---
--- Index pour la table `eval`
---
-ALTER TABLE `eval`
-  ADD PRIMARY KEY (`id_eval`),
-  ADD KEY `id_ressource` (`id_ressource`);
-
---
--- Index pour la table `matiereens`
---
-ALTER TABLE `matiereens`
-  ADD PRIMARY KEY (`id_ressource`,`id_ens`),
-  ADD KEY `id_ens` (`id_ens`);
-
---
--- Index pour la table `notes`
---
-ALTER TABLE `notes`
-  ADD PRIMARY KEY (`id_eval`,`id_etud`),
-  ADD KEY `id_etud` (`id_etud`);
-
---
--- Index pour la table `promotions`
---
-ALTER TABLE `promotions`
-  ADD PRIMARY KEY (`id_promo`);
-
---
--- Index pour la table `ressource`
---
-ALTER TABLE `ressource`
-  ADD PRIMARY KEY (`id_ressource`),
-  ADD KEY `ue` (`ue`);
-
---
--- Index pour la table `tp`
---
-ALTER TABLE `tp`
-  ADD PRIMARY KEY (`id_tp`),
-  ADD KEY `promotion` (`promotion`);
-
---
--- Index pour la table `ue`
---
-ALTER TABLE `ue`
-  ADD PRIMARY KEY (`id_ue`),
-  ADD KEY `id_promo` (`id_promo`);
 
 --
 -- Contraintes pour les tables déchargées
