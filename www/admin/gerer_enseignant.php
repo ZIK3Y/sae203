@@ -1,20 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -47,7 +30,7 @@
         <h1>Liste des Enseignants</h1>
     </div>
     <div class="div45">
-        <a href="../../password.php" class="button-22" id="buttonenseignant">Ajouter Enseignant</a>
+        <a href="../../password.php" class="button-22" id="buttonenseignant">Ajouter Compte</a>
     </div>
 
     <?php
@@ -55,28 +38,29 @@
 
     $connect = connexionDB();
 
-    // Écriture de la requête     
-    $req = "SELECT id, nom, prenom, password, niv_perm FROM compte WHERE niv_perm = 2 OR niv_perm = 3";          
-
-    // Exécution de la requête     
+  
+    $req = "SELECT cpt.id, cpt.nom, cpt.prenom, cpt.password, cpt.niv_perm, ens.num_tel, ens.mail FROM compte cpt JOIN enseignants ens ON cpt.id = ens.id_ens WHERE cpt.niv_perm = 2 ";          
+    
     $pdoreq = $connect->query($req);          
 
-    // Définition du mode de la récupération des données     
+   
     $pdoreq->setFetchMode(PDO::FETCH_ASSOC);    
 
     // Début du tableau   
     echo "<table class='styled-table' border='1'>";     
-    echo "<tr><th>Id</th><th>Nom</th><th>Prénom</th><th>Password</th><th>Niveau Permission</th><th>Actions</th></tr>";          
+    echo "<tr><th>Id</th><th>Nom</th><th>Prénom</th><th>N° de Téléphone</th><th>Adresse mail</th><th>Password</th><th>Niveau Permission</th><th>Actions</th></tr>";          
 
-    // Parcours des données et affichage dans le tableau     
+    // ici tu va parcourir tout le tableau  
     foreach ($pdoreq as $ligne) {         
         echo "<tr id='row-" . $ligne['id'] . "'>";         
         echo "<td>" . $ligne['id'] . "</td>";         
         echo "<td>" . $ligne['nom'] . "</td>";         
-        echo "<td>" . $ligne['prenom'] . "</td>";         
+        echo "<td>" . $ligne['prenom'] . "</td>";
+        echo "<td>" . $ligne['num_tel'] . "</td>";
+        echo "<td>" . $ligne['mail'] . "</td>";       
         echo "<td>" . $ligne['password'] . "</td>";         
         echo "<td>" . $ligne['niv_perm'] . "</td>";        
-        echo "<td><div class='divbouton'><a href='#' class='boutonmodifier' type='submit'>Modifier</a><button class='boutonsupprimer' type='button' onclick='suppr(" . $ligne['id'] . ")'>Supprimer</button></div></td>";   
+        echo "<td><div class='divbouton'><a href='modifier.php?id=" . $ligne['id'] . "' class='boutonmodifier'>Modifier</a><button class='boutonsupprimer' type='button' onclick='suppr(" . $ligne['id'] . ")'>Supprimer</button></div></td>";   
         echo "</tr>";     
     }     
 
@@ -89,7 +73,7 @@
 <script>
 function suppr(id) {
     if (confirm("Voulez-vous supprimer la ligne?")) {
-        // Supprimer la ligne visuellement
+        // Supprime la ligne visuellement
         var row = document.getElementById("row-" + id);
         row.parentNode.removeChild(row);
 
@@ -104,8 +88,21 @@ function suppr(id) {
             }
         };
         xhr.send("id=" + id);
+
+        // Supprimer également de la table "enseignants"
+        var xhr2 = new XMLHttpRequest();
+        xhr2.open("POST", "supprimer_enseignant.php", true);
+        xhr2.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr2.onreadystatechange = function() {
+            if (xhr2.readyState === 4 && xhr2.status === 200) {
+                console.log(xhr2.responseText);
+                //alert('Informations enseignant supprimées avec succès.');
+            }
+        };
+        xhr2.send("id=" + id);
     }
 }
+
 </script>
 
 

@@ -1,8 +1,11 @@
 <?php
+session_start();    
+
 require 'www/config.php';
+$pdo = connexionDB();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $pdo = connexionDB();
+
     $id = $_POST['id'];
     $nom = $_POST['nom'];
     $prenom = $_POST['prenom'];
@@ -18,6 +21,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $passman->bindParam(':password', $hashedPassword);
     $passman->bindParam(':niv_perm', $niv_perm);
     $passman->execute();
+
+    if($niv_perm == 2) {
+        $requeteEnseignant = "INSERT INTO enseignants VALUES ({$id}, 0000000000, 'adefinir@adressemail.com');";
+        $reponseEnseignant = $pdo->query($requeteEnseignant);
+
+    }
+    if($niv_perm == 1) {
+        $requeteEnseignant = "INSERT INTO enseignants VALUES ({$id}, 0000000000, 'adefinir@adressemail.com');";
+        $reponseEnseignant = $pdo->query($requeteEnseignant);
+
+    }
 }
 ?>
 
