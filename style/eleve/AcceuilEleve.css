@@ -21,26 +21,26 @@ header {
 }
 
 .headermain {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
+    position: relative;
+    height: 100%;
 }
 
 .img0 {
     position: absolute;
     left: 20px;
-    height: 100%;
+    top: 50%;
+    transform: translateY(-50%);
     display: flex;
     align-items: center;
 }
 
-.img1-container {
-    flex: 0 0 auto;
+.img1 {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
     display: flex;
     align-items: center;
-    height: 100%;
-    position: relative;
 }
 
 .profile-pic {
@@ -50,75 +50,34 @@ header {
     margin-top: 20px;
 }
 
-#list {
-    flex: 1 1 auto;
-    display: flex;
-    justify-content: center;
-}
-
-#list ul {
-    display: flex;
-    list-style-type: none;
-}
-
-#list ul li {
-    margin: 0 120px;
-}
-
-.button-23 {
-    padding: 15px 30px;
-    background-color: #DDEAD7;
-    color: #000000;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 20px;
-    text-decoration: none;
-}
-
-.button-23:hover {
-    background-color: #EEEEEE;
-}
-
 .logo {
     height: 150px;
     width: auto;
 }
-.button-22 {
-    margin-top: 5px;
-    padding: 15px 30px;
-    background-color: #DDEAD7;
-    color: #000000;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 20px;
-    font-weight: bold;
-    text-decoration: none;
-}
 
-.button-container {
+.bC {
     display: flex;
     justify-content: space-evenly;
     padding-left: 200px;
     padding-right: 200px;
     padding-top: 100px;
 }
+
 .button {
     background-color: #DDEAD7;
     color: #000000;
-margin-top: 175px;
+    margin-top: 175px;
     font-size: xx-large;
     text-align: center;
-
     font-weight: bold;
     cursor: pointer;
 }
-a{
-    
+
+a {
     text-decoration: none;
 }
-.div1{
+
+.div1 {
     width: 350px;
     height: 400px;
     margin-top: 200px;
@@ -140,8 +99,8 @@ a{
     font-weight: bold;
     cursor: pointer;
 }
-.div2{
-   
+
+.div2 {
     width: 350px;
     height: 400px;
     border-radius: 5px;
@@ -170,7 +129,7 @@ a{
     padding: 10px 20px;
 }
 
-.buttoncontainC{
+.bCC {
     display: flex;
     justify-content: space-evenly;
     padding-left: 650px;
@@ -179,7 +138,4 @@ a{
     background-color: #EEEEEE;
     border: #000000 3px;
     border-radius: 12px;
-}
-a {
-    text-decoration: none;
 }

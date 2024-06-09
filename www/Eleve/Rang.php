@@ -25,6 +25,9 @@
             <img src="../../ressources/image/personne.png" alt="Photo de profil" class="photo-profil">
         </div>
     </div>
+    <div class="logout-bar" id="logout-bar">
+            <a href="../logout.php">Déconnexion</a>
+        </div>
 </header>
 <div class="C">
     <div class="SB">
@@ -40,3 +43,42 @@
 
 </body>
 </html>
+
+
+
+
+
+
+<!-- ici c'est le script js pour la deconnexion et sont css en dessous -->
+<script>
+    document.querySelector('.photo-profil').addEventListener('click', function() {
+        var logoutBar = document.getElementById('logout-bar');
+        logoutBar.style.display = (logoutBar.style.display === 'none' || logoutBar.style.display === '') ? 'block' : 'none';
+    });
+
+    document.addEventListener('click', function(event) {
+        var isClickInside = document.querySelector('.photo-profil').contains(event.target) || document.getElementById('logout-bar').contains(event.target);
+        if (!isClickInside) {
+            document.getElementById('logout-bar').style.display = 'none';
+        }
+    });
+</script>
+
+<style>
+        .logout-bar {
+            display: none;
+            position: absolute;
+            right: 10px;
+            top: 140px; /* Ajustez selon la hauteur de votre header */
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .logout-bar a {
+            text-decoration: none;
+            color: #000;
+        }
+    </style>
+
+<!-- ici c'est le script js pour la deconnexion et sont css en dessous //>
