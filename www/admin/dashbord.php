@@ -1,3 +1,20 @@
+<?php
+session_start();
+require '../config.php';
+
+error_reporting(0);
+
+$perm = $_SESSION['perm'];
+
+if (!isset($_SESSION['user']) || $perm != 3) {
+    header('Location: ../login.php');
+    exit();
+}
+
+$bdd = connexionDB();
+?>
+
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>

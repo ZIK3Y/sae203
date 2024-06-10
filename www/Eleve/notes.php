@@ -1,18 +1,18 @@
 <?php
-// Démarrer la session
 session_start();
 
-// Inclure le fichier de configuration
 require '../config.php';
+error_reporting(0);
 
-// Établir la connexion à la base de données
 $conn = connexionDB();
+$perm = $_SESSION['perm'];
 
-// Rediriger si l'utilisateur n'est pas connecté
-if (!isset($_SESSION['user'])) {
+if (!isset($_SESSION['user']) || $perm != 1) {
     header('Location: ../login.php');
     exit();
 }
+
+$id = $_SESSION['user'];
 
 $requeteRessource = "SELECT r.id_ressource, r.intitule, promo.formation
                     FROM etudiant etud
@@ -38,16 +38,13 @@ if($_SERVER['REQUEST_METHOD']==='GET') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Voir ses notes</title>
-    <!-- Inclure les ressources Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </head>
 <body>
-    <!-- Affichage des ressources et évaluations associées -->
     <div class="container mt-4">
         <div class="accordion" id="ressourceAccordion">
             <?php
-                // Afficher les ressources de l'utilisateur
                 if ($reponse) {
                     foreach ($resultatRessource as $ressource) {
                         $ressourceId = $ressource['id_ressource'];
@@ -61,7 +58,6 @@ if($_SERVER['REQUEST_METHOD']==='GET') {
                         echo '<div class="accordion-body">';
                         echo '<ul class="list-group">';
     
-                        // Récupérer les évaluations associées à la ressource
                         $requeteEval = "SELECT * FROM eval WHERE id_ressource = :id_ressource";
                         $stmtEval = $conn->prepare($requeteEval);
                         $stmtEval->bindParam(':id_ressource', $ressourceId);
@@ -95,8 +91,9 @@ if($_SERVER['REQUEST_METHOD']==='GET') {
                     </th>
                 </tr>
     <?php
-    $requeteNote = $conn->prepare('SELECT n.note FROM eval e JOIN notes n ON e.id_eval = n.id_eval WHERE e.id_eval = :id');
+    $requeteNote = $conn->prepare('SELECT n.note FROM eval e JOIN notes n ON e.id_eval = n.id_eval JOIN etudiant etu ON n.id_etud = etu.id_etud WHERE e.id_eval = :id AND etu.id_etud = :etudiant');
     $requeteNote->bindParam(':id', $idEval);
+    $requeteNote->bindParam(':etudiant', $id);
     $requeteNote->execute();
 
     $resultatNote = $requeteNote->fetchAll(PDO::FETCH_ASSOC);

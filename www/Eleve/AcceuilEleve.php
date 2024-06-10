@@ -23,7 +23,7 @@
 
 <div class="bC">
     <div class="div1"><a href="Paramètre.php" class="button">Paramètres</a></div>
-    <div class="div2"><a href="Consulterlesnotes.php" class="button">Consulter <br>les notes</a></div>
+    <div class="div2"><a href="notes.php" class="button">Consulter <br>les notes</a></div>
     <div class="div1"><a href="Votrecompte.php" class="button">Votre Compte</a></div>
 </div>
 

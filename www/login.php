@@ -34,6 +34,7 @@
 <?php
 session_start();
 include 'config.php';
+error_reporting(0);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $pdo = connexionDB();
@@ -48,6 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (password_verify($password, $user['password'])) {
         $_SESSION['user'] = $user['id'];
+        $_SESSION['perm'] = $user['niv_perm'];
 
         switch ($user['niv_perm']) {
             case 1:

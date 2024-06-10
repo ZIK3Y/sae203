@@ -2,10 +2,10 @@
 
 require '../config.php';
 
+$bdd = connexionDB();
+
 function getMoyenne($intitule, $id_etud) {
     try {
-        $pdo = new PDO("mysql:host=localhost;dbname=Uninote", "root", "");
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $stmt = $pdo->prepare("SELECT n.note, e.coeff FROM notes n INNER JOIN eval e ON n.id_eval = e.id_eval INNER JOIN ressource r ON e.id_ressource = r.id_ressource WHERE n.id_etud = :id_etud AND r.intitule = :intitule");
         $stmt->bindParam(':id_etud', $id_etud, PDO::PARAM_INT);
