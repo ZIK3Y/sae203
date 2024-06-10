@@ -4,7 +4,7 @@ require '../config.php';
 $connect = connexionDB();
 
 if (isset($_GET['id'])) {
-    $stmt = $connect->prepare('SELECT * FROM compte WHERE id = ?');
+    $stmt = $connect->prepare('SELECT cpt.*, etu.promo FROM compte cpt LEFT JOIN etudiant etu ON cpt.id = etu.id_etud WHERE cpt.id = ?');
     $stmt->execute([$_GET['id']]);
     $enseignant = $stmt->fetch();
     if (!$enseignant) {
@@ -13,20 +13,22 @@ if (isset($_GET['id'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  
     $id = $_POST['id'];
     $nom = $_POST['nom'];
     $prenom = $_POST['prenom'];
+    $promo = $_POST['promo'];
     $password = $_POST['password'];
     $niv_perm = $_POST['niv_perm'];
 
-    // hashage du mdp ici
+    // Hashage du mot de passe
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-  
     $stmt = $connect->prepare('UPDATE compte SET nom = ?, prenom = ?, password = ?, niv_perm = ? WHERE id = ?');
     $stmt->execute([$nom, $prenom, $hashed_password, $niv_perm, $id]);
+
     if ($niv_perm == 1) {
+        $stmt = $connect->prepare('UPDATE etudiant SET promo = ? WHERE id_etud = ?');
+        $stmt->execute([$promo, $id]);
         header('Location: gerer_etudiant.php');
     } elseif ($niv_perm == 2 || $niv_perm == 3) {
         header('Location: gerer_enseignant.php');
@@ -59,6 +61,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="form-group">
                 <label for="prenom">Prénom</label>
                 <input type="text" class="form-control" id="prenom" name="prenom" value="<?= htmlspecialchars($enseignant['prenom']) ?>" required>
+            </div>
+            <div class="form-group">
+                <label for="promo">Promotion</label>
+                <input type="text" class="form-control" id="promo" name="promo" value="<?= htmlspecialchars($enseignant['promo']) ?>" required>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
