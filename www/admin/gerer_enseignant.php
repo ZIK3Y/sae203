@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UniNote</title>
-   
 </head>
 <body>
     <header>
@@ -40,7 +39,10 @@
 
     $connect = connexionDB();
 
-    $req = "SELECT cpt.id, cpt.nom, cpt.prenom, cpt.password, cpt.niv_perm, ens.num_tel, ens.mail FROM compte cpt JOIN enseignants ens ON cpt.id = ens.id_ens WHERE cpt.niv_perm = 2";          
+    $req = "SELECT cpt.id, cpt.nom, cpt.prenom, cpt.password, cpt.niv_perm, ens.num_tel, ens.mail 
+            FROM compte cpt 
+            JOIN enseignants ens ON cpt.id = ens.id_ens 
+            WHERE cpt.niv_perm = 2";          
     
     $pdoreq = $connect->query($req);          
 
@@ -58,7 +60,7 @@
         echo "<td>" . $ligne['mail'] . "</td>";       
         echo "<td>" . $ligne['password'] . "</td>";         
         echo "<td>" . $ligne['niv_perm'] . "</td>";        
-        echo "<td><div class='divbouton'><a href='modifier.php?id=" . $ligne['id'] . "' class='boutonmodifier'>Modifier</a><button class='boutonsupprimer' type='button' onclick='suppr(" . $ligne['id'] . ")'>Supprimer</button></div></td>";   
+        echo "<td><div class='divbouton'><a href='modifierens.php?id=" . $ligne['id'] . "' class='boutonmodifier'>Modifier</a><button class='boutonsupprimer' type='button' onclick='suppr(" . $ligne['id'] . ")'>Supprimer</button></div></td>";   
         echo "</tr>";     
     }     
 
@@ -66,7 +68,6 @@
     ?>
 </body>
 </html>
-
 
 <script>
 function suppr(id) {
@@ -100,13 +101,8 @@ function suppr(id) {
         xhr2.send("id=" + id);
     }
 }
-
 </script>
 
-
-
-
-<!-- ici c'est le script js pour la deconnexion et sont css en dessous -->
 <script>
     document.querySelector('.profile-pic').addEventListener('click', function() {
         var logoutBar = document.getElementById('logout-bar');
@@ -122,20 +118,18 @@ function suppr(id) {
 </script>
 
 <style>
-        .logout-bar {
-            display: none;
-            position: absolute;
-            right: 10px;
-            top: 140px; /* Ajustez selon la hauteur de votre header */
-            background-color: #fff;
-            border: 1px solid #ccc;
-            padding: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .logout-bar a {
-            text-decoration: none;
-            color: #000;
-        }
-    </style>
-
-<!-- ici c'est le script js pour la deconnexion et sont css en dessous //>
+.logout-bar {
+    display: none;
+    position: absolute;
+    right: 10px;
+    top: 140px; /* Ajustez selon la hauteur de votre header */
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.logout-bar a {
+    text-decoration: none;
+    color: #000;
+}
+</style>

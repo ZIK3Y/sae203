@@ -15,7 +15,7 @@
      
             <div id="list">
                 <ul>
-               <li><a href="dashbord.php" class="button-23">Admin Dashbord</a></li>
+               <li><a href="dashbord.php" class="button-23">Admin Dashboard</a></li>
                <li> <a href="gerer_enseignant.php" class="button-23">Gérer les Enseignants</a></li>
                <li> <a href="gerer_classes.php" class="button-23">Gérer les classes</a></li> 
                 </ul>
@@ -42,29 +42,29 @@
 
     $connect = connexionDB();
 
-  
-    $req = "SELECT cpt.id, cpt.nom, cpt.prenom, cpt.password, cpt.niv_perm, ens.num_tel, ens.mail FROM compte cpt JOIN enseignants ens ON cpt.id = ens.id_ens WHERE cpt.niv_perm = 1 ";          
+    $req = "SELECT cpt.id, cpt.nom, cpt.prenom, cpt.password, cpt.niv_perm, etu.promo 
+            FROM compte cpt 
+            JOIN etudiant etu ON cpt.id = etu.id_etud 
+            WHERE cpt.niv_perm = 1";          
     
     $pdoreq = $connect->query($req);          
 
-   
     $pdoreq->setFetchMode(PDO::FETCH_ASSOC);    
 
     // Début du tableau   
     echo "<table class='styled-table' border='1'>";     
-    echo "<tr><th>Id</th><th>Nom</th><th>Prénom</th><th>N° de Téléphone</th><th>Adresse mail</th><th>Password</th><th>Niveau Permission</th><th>Actions</th></tr>";          
+    echo "<tr><th>Id</th><th>Nom</th><th>Prénom</th><th>promotion</th><th>Password</th><th>Niveau Permission</th><th>Actions</th></tr>";          
 
-    // ici tu va parcourir tout le tableau  
+    // Parcours du tableau  
     foreach ($pdoreq as $ligne) {         
         echo "<tr id='row-" . $ligne['id'] . "'>";         
         echo "<td>" . $ligne['id'] . "</td>";         
         echo "<td>" . $ligne['nom'] . "</td>";         
         echo "<td>" . $ligne['prenom'] . "</td>";
-        echo "<td>" . $ligne['num_tel'] . "</td>";
-        echo "<td>" . $ligne['mail'] . "</td>";       
+        echo "<td>" . $ligne['promo'] . "</td>";       
         echo "<td>" . $ligne['password'] . "</td>";         
         echo "<td>" . $ligne['niv_perm'] . "</td>";        
-        echo "<td><div class='divbouton'><a href='modifier.php?id=" . $ligne['id'] . "' class='boutonmodifier'>Modifier</a><button class='boutonsupprimer' type='button' onclick='suppr(" . $ligne['id'] . ")'>Supprimer</button></div></td>";   
+        echo "<td><div class='divbouton'><a href='modifieretu.php?id=" . $ligne['id'] . "' class='boutonmodifier'>Modifier</a><button class='boutonsupprimer' type='button' onclick='suppr(" . $ligne['id'] . ")'>Supprimer</button></div></td>";   
         echo "</tr>";     
     }     
 
@@ -77,11 +77,11 @@
 <script>
 function suppr(id) {
     if (confirm("Voulez-vous supprimer la ligne?")) {
-        // Supprime la ligne visuellement mais la supprime pas sur la bdd
+        // Supprime la ligne visuellement mais ne la supprime pas de la bdd
         var row = document.getElementById("row-" + id);
         row.parentNode.removeChild(row);
 
-        // Supprimer la bdd via ajax
+        // Supprimer de la bdd via ajax
         var xhr = new XMLHttpRequest();
         xhr.open("POST", "supprimer.php", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -96,8 +96,7 @@ function suppr(id) {
 }
 </script>
 
-
-<!-- ici c'est le script js pour la deconnexion et sont css en dessous -->
+<!-- ici c'est le script js pour la déconnexion et son css en dessous -->
 <script>
     document.querySelector('.profile-pic').addEventListener('click', function() {
         var logoutBar = document.getElementById('logout-bar');
@@ -113,23 +112,18 @@ function suppr(id) {
 </script>
 
 <style>
-        .logout-bar {
-            display: none;
-            position: absolute;
-            right: 10px;
-            top: 140px; /* Ajustez selon la hauteur de votre header */
-            background-color: #fff;
-            border: 1px solid #ccc;
-            padding: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .logout-bar a {
-            text-decoration: none;
-            color: #000;
-        }
-    </style>
-
-<!-- ici c'est le script js pour la deconnexion et sont css en dessous //>
-
-
-
+.logout-bar {
+    display: none;
+    position: absolute;
+    right: 10px;
+    top: 140px; /* Ajustez selon la hauteur de votre header */
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.logout-bar a {
+    text-decoration: none;
+    color: #000;
+}
+</style>
