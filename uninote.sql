@@ -127,7 +127,7 @@ INSERT INTO `matiereens` (`id_ressource`, `id_ens`) VALUES
 CREATE TABLE `notes` (
   `id_eval` int(11) NOT NULL,
   `id_etud` int(11) NOT NULL,
-  `note` int(11) DEFAULT NULL,
+  `note` float DEFAULT NULL,
   PRIMARY KEY (`id_eval`, `id_etud`),
   KEY `id_etud` (`id_etud`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

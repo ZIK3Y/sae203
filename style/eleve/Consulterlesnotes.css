@@ -87,7 +87,7 @@ header {
 
 .C {
     display: flex;
-    width: 100%;
+    width: 90%;
     height: 90vh;
     padding: 20px;
     box-sizing: border-box;
@@ -107,6 +107,9 @@ header {
 
 .PD {
     flex: 0 0 45%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .matiere {
@@ -178,18 +181,19 @@ header {
     margin-top: 10px;
 }
 
-.div11{
-    display: flex;
-    justify-content: center;
+.chart-container {
+    width: 100%;
+    max-width: 500px;
 }
 
 form {
-    width: 450px;
+    width: 100%;
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
 canvas {
     max-width: 100%;
 }

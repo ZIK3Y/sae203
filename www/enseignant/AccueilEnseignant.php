@@ -20,7 +20,7 @@
     </div>
       
         <div class="div2">
-        <a href="ModifierlesNotes.php" class="button">Modifier <br>les <br>Notes</a>
+        <a href="notes.php" class="button">Modifier <br>les <br>Notes</a>
         </div>
         <div class="div1">
         <a href="VotreCompte.php" class="button">Votre Compte</a>
