@@ -20,16 +20,12 @@
             <a href="../logout.php">Déconnexion</a>
         </div>
 </header>
-
+<div class="Fond">
 <div class="bC">
-    <div class="div1"><a href="Paramètre.php" class="button">Paramètres</a></div>
-    <div class="div2"><a href="notes.php" class="button">Consulter <br>les notes</a></div>
-    <div class="div1"><a href="Votrecompte.php" class="button">Votre Compte</a></div>
+    <div class="div1"><a href="Rang.php" class="button">Voir le Rang</a></div>
+    <div class="div1"><a href="notes.php" class="button">Consulter les notes</a></div>
+    <div class="div1"><a href="UE.php" class="button">Voir les UE</a></div>
 </div>
-
-<div class="bCC">
-    <div class="divC"><a href="Rang.php" class="C">Rang</a></div>
-    <div class="divC"><a href="UE.php" class="C">UE</a></div>
 </div>
 </body>
 </html>

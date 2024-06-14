@@ -1,17 +1,25 @@
+/* Importation de la police */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,400&display=swap');
 
+/* Réinitialisation des marges et des paddings pour tous les éléments */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* Styles pour le corps de la page */
 body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
+    background-image: url('../../ressources/image/ori_blue.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
 }
 
+/* Styles pour le header */
 header {
     background-color: #40798c;
     padding: 10px 0;
@@ -83,6 +91,7 @@ header {
     height: 150px;
     width: auto;
 }
+
 .button-22 {
     margin-top: 5px;
     padding: 15px 30px;
@@ -96,70 +105,74 @@ header {
     text-decoration: none;
 }
 
-/* tout le header  */
-.div46{
-
+/* Styles pour les divs */
+.div46 {
     margin-top: 80px;
     margin-left: 100px;
 }
-.div45{
 
+.div45 {
     margin-top: 20px;
     margin-left: 100px;
 }
+
+/* Styles pour le tableau */
 .styled-table {
     width: 80%;
     margin: 40px auto;
     overflow-x: auto;
- 
 }
+
 table {
     width: 100%;
     border-collapse: collapse;
-   
 }
+
 th, td {
     border: 1px solid #a6a6a6;
     text-align: left;
     padding: 8px;
 }
+
 th {
     background-color: #f2f2f2;
 }
-tr:nth-child(even) {
-    background-color: #f9f9f9;
+
+tr {
+    background-color: #fff;
 }
-.divbouton{
+
+.divbouton {
     display: flex;
     justify-content: space-around;
 }
 
-
-
+/* Styles pour les boutons */
 .boutonsupprimer {
-  appearance: none;
-  background-color: #eeeeee;
-  border: 1px solid rgba(27, 31, 35, .15);
-  border-radius: 6px;
-  box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
-  box-sizing: border-box;   
-  color: #000000;
-  cursor: pointer;
-  display: inline-block;
-  font-family: -apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 20px;
-  padding: 6px 16px;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  vertical-align: middle;
-  white-space: nowrap;
+    appearance: none;
+    background-color: #eeeeee;
+    border: 1px solid rgba(27, 31, 35, .15);
+    border-radius: 6px;
+    box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+    box-sizing: border-box;   
+    color: #000000;
+    cursor: pointer;
+    display: inline-block;
+    font-family: -apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    padding: 6px 16px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+    white-space: nowrap;
 }
+
 .boutonmodifier {
     appearance: none;
     background-color: #40798c;
@@ -183,7 +196,21 @@ tr:nth-child(even) {
     touch-action: manipulation;
     vertical-align: middle;
     white-space: nowrap;
-  }
+}
 
+/* Styles pour la barre de déconnexion */
+.logout-bar {
+    display: none;
+    position: absolute;
+    right: 10px;
+    top: 140px; /* Ajustez selon la hauteur de votre header */
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 
-
+.logout-bar a {
+    text-decoration: none;
+    color: #000;
+}
