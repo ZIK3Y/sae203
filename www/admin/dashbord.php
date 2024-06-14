@@ -36,7 +36,7 @@ $bdd = connexionDB();
         <div class="div1">  <a href="gerer_enseignant.php" class="button">Modifier les  Enseignants</a> </div>
       
         <div class="div">
-        <a href="gerer_classes.php" class="button">Modifier les<br> Classes</a>
+        <a href="gerer_ressource.php" class="button">Modifier les<br> ressources</a>
         </div>
         <div class="div1">
         <a href="gerer_etudiant.php" class="button">Modifier les <br>

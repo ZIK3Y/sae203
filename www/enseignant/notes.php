@@ -68,26 +68,75 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
 
-    <a class="btn btn-primary" id="ajouterEval" href="ajouter_note.php" role="button">Ajouter une évaluation</a>
-    <a class="btn btn-primary" id="modifierEval" href="modifier_note.php" role="button">Modifier une évaluation</a>
-    <a class="btn btn-primary" id="supprimerEval" href="supprimer_note.php" role="button">Supprimer une évaluation</a>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ajouterEval" data-bs-whatever="@getbootstrap">Ajouter une évaluation</button>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ajouterEval" data-bs-whatever="@getbootstrap">Supprimer une évaluation</button>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ajouterEval" data-bs-whatever="@getbootstrap">Modifier une évaluation</button>
 
-    <div class="container mt-4">
+    <div class="modal fade" id="ajouterEval" tabindex="-1" aria-labelledby="ajouterEvalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+    <form action='notes.php' method='POST'>
+        <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title fs-5" id="ajouterEvalLabel">Ajouter une évaluation</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form action="notes.php" method="POST">
+            <div class="mb-3">
+                <label for="nom_eval" class="col-form-label">Libellé:</label>
+                <input type="text" class="form-control" name="nom_eval" id="nom_eval">
+            </div>
+            <div class="mb-3">
+                <label for="ressource" class="col-form-label">Ressource :</label>
+                <select name="ressource" id="ressource">
+                <option value=''>--- Merci de choisir une ressource ---</option>
+                <?php 
+                    $requeteRessource = "SELECT r.id_ressource, r.intitule, promo.formation
+                                        FROM enseignants ens 
+                                        JOIN matiereens men ON ens.id_ens = men.id_ens 
+                                        JOIN ressource r ON men.id_ressource = r.id_ressource 
+                                        JOIN ue ue ON r.ue = ue.id_ue 
+                                        JOIN promotions promo ON ue.id_promo = promo.id_promo 
+                                        WHERE ens.id_ens = {$_SESSION['user']};";
+
+                    $reponse = $conn->query($requeteRessource);
+
+                    if (isset($reponse)) {
+                        $rows = $reponse->fetchAll(PDO::FETCH_ASSOC);
+                        $rowCount = count($rows);
+                        if ($rowCount > 0) {
+                            foreach ($rows as $row) {
+                                echo "<option value='" . $row['id_ressource'] . "'>" . $row['intitule'] . " | Promotion : " . $row['formation'] . "</option>";
+                            }
+                        } else {
+                            echo "<option value=''>--- Merci de choisir une ressource ---</option>";
+                        }
+                    } else {
+                        echo "Une erreur s'est produite lors de l'exécution de la requête.";
+                    }
+                ?>
+                </select>
+                <div class="mb-3">
+                    <label for="coeff" class="col-form-label">Coefficient :</label>
+                    <input type="number" class="form-control" id="coeff" name="coeff">
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+            <button type="submit" class="btn btn-primary">Ajouter</button>
+        </div>
+        </div>
+        </form>
+    </div>
+    </div>
+
+    
+
+        <div class="container mt-4">
         <div class="accordion" id="ressourceAccordion">
             <?php
-                $requeteRessource = "SELECT r.id_ressource, r.intitule, promo.formation
-                FROM enseignants ens 
-                JOIN matiereens men ON ens.id_ens = men.id_ens 
-                JOIN ressource r ON men.id_ressource = r.id_ressource 
-                JOIN ue ue ON r.ue = ue.id_ue 
-                JOIN promotions promo ON ue.id_promo = promo.id_promo 
-                WHERE ens.id_ens = {$_SESSION['user']};";
-
-                $reponse = $conn->query($requeteRessource);
-
-                if (isset($reponse)) {
-                    $rows = $reponse->fetchAll(PDO::FETCH_ASSOC);
-                    $rowCount = count($rows);
+                if ($reponse) {
                     foreach ($rows as $ressource) {
                         $ressourceId = $ressource['id_ressource'];
                         echo '<div class="accordion-item">';
@@ -105,7 +154,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $stmtEval->bindParam(':id_ressource', $ressourceId);
                         $stmtEval->execute();
                         $evals = $stmtEval->fetchAll(PDO::FETCH_ASSOC);
-                        
                         if ($evals) {
                             foreach ($evals as $eval) {
                                 echo '<li class="list-group-item"><a href="notes.php?id_eval=' . $eval['id_eval'] . '">' . $eval['intitule'] . '</a> | Coefficient : ' . $eval['coeff'] . ' | Date : ' . $eval['date'] . '</li>';

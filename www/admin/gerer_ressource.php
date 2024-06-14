@@ -33,10 +33,10 @@
         <h1>Liste des Enseignants</h1>
     </div>
     <div class="div45">
-        <a href="../../password.php" class="button-22" id="buttonenseignant">Ajouter Classe</a>
+        <a href="../../password.php" class="button-22" id="buttonenseignant">Ajouter ressources</a>
     </div>
 
-   <h1>a définir cette page  </h1>
+  
 </body>
 </html>
 
