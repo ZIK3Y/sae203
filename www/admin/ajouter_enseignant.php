@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <ul>
                <li><a href="./dashbord.php" class="button-23">Admin Dashbord</a></li>
                <li> <a href="./gerer_etudiant.php" class="button-23">Gérer les étudiants</a></li>
-               <li> <a href="./gerer_classes.php" class="button-23">Gérer les classes</a></li> 
+               <li> <a href="./gerer_ressource.php" class="button-23">Gérer les ressources</a></li> 
                 </ul>
             </div>
         

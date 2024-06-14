@@ -16,7 +16,7 @@
                 <ul>
                     <li><a href="dashbord.php" class="button-23">Admin Dashboard</a></li>
                     <li><a href="gerer_etudiant.php" class="button-23">Gérer les étudiants</a></li>
-                    <li><a href="gerer_classes.php" class="button-23">Gérer les classes</a></li>
+                    <li><a href="gerer_ressource.php" class="button-23">Gérer les ressources</a></li>
                 </ul>
             </div>
             <div class="img1">
