@@ -17,7 +17,7 @@
                 <ul>
                <li><a href="dashbord.php" class="button-23">Admin Dashboard</a></li>
                <li> <a href="gerer_enseignant.php" class="button-23">Gérer les Enseignants</a></li>
-               <li> <a href="gerer_classes.php" class="button-23">Gérer les classes</a></li> 
+               <li> <a href="gerer_ressource.php" class="button-23">Gérer les ressources</a></li> 
                 </ul>
             </div>
         
@@ -34,7 +34,7 @@
         <h1>Liste des Étudiants</h1>
     </div>
     <div class="div45">
-        <a href="./ajouter_etudiant.php" class="button-22" id="buttonenseignant">Ajouter Compte</a>
+        <a href="./ajouter_etudiant.php" class="button-22" id="buttonenseignant">Ajouter Étudiant</a>
     </div>
 
     <?php
