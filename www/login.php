@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="logoc">
-        <img class="logoconnexion" src="../ressources/image/logoconnexion.png" alt="logoconnexion">
+        <img class="logoconnexion" src="../ressources/image/logo.png" alt="logoconnexion">
     </div>
     <div class="h1cc">
         <h1 class="h1c">Bienvenue sur UniNote, veuillez vous connectez</h1>

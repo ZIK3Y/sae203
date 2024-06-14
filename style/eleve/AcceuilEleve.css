@@ -1,9 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,400&display=swap');
-
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
 }
 
 body {
@@ -58,19 +60,25 @@ header {
 .bC {
     display: flex;
     justify-content: space-evenly;
-    padding-left: 200px;
-    padding-right: 200px;
-    padding-top: 100px;
+    align-items: center;
+    height: calc(100vh - 150px);
 }
 
 .button {
-    background-color: #DDEAD7;
+    background-color: #E8F5E9;
     color: #000000;
-    margin-top: 175px;
     font-size: xx-large;
     text-align: center;
     font-weight: bold;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 350px;
+    height: 200px;
+    border-radius: 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 2px solid black;
 }
 
 a {
@@ -78,64 +86,17 @@ a {
 }
 
 .div1 {
-    width: 350px;
-    height: 400px;
-    margin-top: 200px;
-    background-color: #DDEAD7;
-    display: flex;
-    justify-content: center;
-    border-radius: 5px;
-}
-
-.buttonadmin {
-    width: 350px;
-    height: 400px;
-    background-color: #DDEAD7;
-    color: #000000;
-    size: 50px;
-    font-size: xx-large;
-    text-align: center;
-    line-height: 400px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.div2 {
-    width: 350px;
-    height: 400px;
-    border-radius: 5px;
-    background-color: #DDEAD7;
     display: flex;
     justify-content: center;
 }
 
-.divC {
-    width: 100px;
-    height: 40px;
-    margin-top: -150px;
-    background-color: #EEEEEE;
+.Fond {
+    background-image: url(../../ressources/image/Eleve.png);
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    min-height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    padding: auto;
-    border-radius: 5px;
-}
-
-.C {
-    color: #000000;
-    font-size: 20px;
-    text-align: center;
-    font-weight: bold;
-    cursor: pointer;
-    padding: 10px 20px;
-}
-
-.bCC {
-    display: flex;
-    justify-content: space-evenly;
-    padding-left: 650px;
-    padding-right: 650px;
-    border-radius: 12px;
-    background-color: #EEEEEE;
-    border: #000000 3px;
-    border-radius: 12px;
 }

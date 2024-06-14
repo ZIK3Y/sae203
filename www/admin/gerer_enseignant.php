@@ -31,7 +31,7 @@
         <h1>Liste des Enseignants</h1>
     </div>
     <div class="div45">
-        <a href="../../password.php" class="button-22" id="buttonenseignant">Ajouter Compte</a>
+        <a href="./ajouter_enseignant.php" class="button-22" id="buttonenseignant">Ajouter Enseignant</a>
     </div>
     
     <?php
@@ -122,7 +122,7 @@ function suppr(id) {
     display: none;
     position: absolute;
     right: 10px;
-    top: 140px; /* Ajustez selon la hauteur de votre header */
+    top: 140px; 
     background-color: #fff;
     border: 1px solid #ccc;
     padding: 10px;
