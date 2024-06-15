@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<link rel="stylesheet" href="../../style/admin/gerer_enseignant.css">
+    <link rel="stylesheet" href="../../style/admin/gerer_enseignant.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UniNote</title>
@@ -12,19 +12,16 @@
             <div class="img0">
                 <img src="../../ressources/image/Logo.png" alt="Logo de l'entreprise" class="logo">
             </div>
-     
             <div id="list">
                 <ul>
-               <li><a href="dashbord.php" class="button-23">Admin Dashboard</a></li>
-               <li> <a href="gerer_enseignant.php" class="button-23">Gérer les Enseignants</a></li>
-               <li> <a href="gerer_ressource.php" class="button-23">Gérer les ressources</a></li> 
+                    <li><a href="dashbord.php" class="button-23">Admin Dashboard</a></li>
+                    <li><a href="gerer_enseignant.php" class="button-23">Gérer les Enseignants</a></li>
+                    <li><a href="gerer_ressource.php" class="button-23">Gérer les ressources</a></li> 
                 </ul>
             </div>
-        
             <div class="img1">
                 <img src="../../ressources/image/personne.png" alt="Photo de profil" class="profile-pic">
             </div>
-            
         </div>
         <div class="logout-bar" id="logout-bar">
             <a href="../logout.php">Déconnexion</a>
@@ -77,18 +74,21 @@
 <script>
 function suppr(id) {
     if (confirm("Voulez-vous supprimer la ligne?")) {
-        // Supprime la ligne visuellement mais ne la supprime pas de la bdd
-        var row = document.getElementById("row-" + id);
-        row.parentNode.removeChild(row);
-
         // Supprimer de la bdd via ajax
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "supprimer.php", true);
+        xhr.open("POST", "supprimeretu.php", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 console.log(xhr.responseText);
-                alert('Ligne supprimée avec succès.');
+                if (xhr.responseText.includes("succès")) {
+                    // Supprime la ligne visuellement après succès
+                    var row = document.getElementById("row-" + id);
+                    row.parentNode.removeChild(row);
+                    alert('Ligne supprimée avec succès.');
+                } else {
+                    alert('Erreur lors de la suppression : ' + xhr.responseText);
+                }
             }
         };
         xhr.send("id=" + id);
@@ -96,19 +96,19 @@ function suppr(id) {
 }
 </script>
 
-<!-- ici c'est le script js pour la déconnexion et son css en dessous -->
+<!-- Script JS pour la déconnexion -->
 <script>
-    document.querySelector('.profile-pic').addEventListener('click', function() {
-        var logoutBar = document.getElementById('logout-bar');
-        logoutBar.style.display = (logoutBar.style.display === 'none' || logoutBar.style.display === '') ? 'block' : 'none';
-    });
+document.querySelector('.profile-pic').addEventListener('click', function() {
+    var logoutBar = document.getElementById('logout-bar');
+    logoutBar.style.display = (logoutBar.style.display === 'none' || logoutBar.style.display === '') ? 'block' : 'none';
+});
 
-    document.addEventListener('click', function(event) {
-        var isClickInside = document.querySelector('.profile-pic').contains(event.target) || document.getElementById('logout-bar').contains(event.target);
-        if (!isClickInside) {
-            document.getElementById('logout-bar').style.display = 'none';
-        }
-    });
+document.addEventListener('click', function(event) {
+    var isClickInside = document.querySelector('.profile-pic').contains(event.target) || document.getElementById('logout-bar').contains(event.target);
+    if (!isClickInside) {
+        document.getElementById('logout-bar').style.display = 'none';
+    }
+});
 </script>
 
 <style>

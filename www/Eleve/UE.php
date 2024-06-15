@@ -67,19 +67,19 @@ function getMoyenne($intitule, $id_etud) {
      
             <div id="list">
                 <ul>
-               <li><a href="./Consulterlesnotes.php" class="button-23">Notes</a></li>
-               <li> <a href="./Votrecompte.php" class="button-23">Votre compte</a></li>
-               <li> <a href="./Paramètre.php" class="button-23">Paramètre</a></li> 
+               <li><a href="./Consulterlesnotes.php" class="button-23">Consulter les notes</a></li>
+               <li> <a href="./Rang.php" class="button-23">Votre Rang</a></li> 
                 </ul>
             </div>
         
             <div class="img1">
                 <img src="../../ressources/image/personne.png" alt="Photo de profil" class="profile-pic">
             </div>
-        </div>
-        <div class="logout-bar" id="logout-bar">
+            <div class="logout-bar" id="logout-bar">
             <a href="../logout.php">Déconnexion</a>
         </div>
+        </div>
+       
     </header>
 
 <div class="button-container">

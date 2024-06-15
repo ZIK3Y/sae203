@@ -72,49 +72,41 @@
 <script>
 function suppr(id) {
     if (confirm("Voulez-vous supprimer la ligne?")) {
-        // Supprime la ligne visuellement mais la supprime pas sur la bdd
-        var row = document.getElementById("row-" + id);
-        row.parentNode.removeChild(row);
-
-        // Supprimer la bdd via ajax
+        // Supprimer de la bdd via ajax
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "supprimer.php", true);
+        xhr.open("POST", "supprimerens.php", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 console.log(xhr.responseText);
-                alert('Ligne supprimée avec succès.');
+                if (xhr.responseText.includes("succès")) {
+                    // Supprime la ligne visuellement après succès
+                    var row = document.getElementById("row-" + id);
+                    row.parentNode.removeChild(row);
+                    alert('Ligne supprimée avec succès.');
+                } else {
+                    alert('Erreur lors de la suppression : ' + xhr.responseText);
+                }
             }
         };
         xhr.send("id=" + id);
-
-        // Supprimer également de la table "enseignants"
-        var xhr2 = new XMLHttpRequest();
-        xhr2.open("POST", "supprimer_enseignant.php", true);
-        xhr2.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhr2.onreadystatechange = function() {
-            if (xhr2.readyState === 4 && xhr2.status === 200) {
-                console.log(xhr2.responseText);
-                //alert('Informations enseignant supprimées avec succès.');
-            }
-        };
-        xhr2.send("id=" + id);
     }
 }
 </script>
 
+<!-- Script JS pour la déconnexion -->
 <script>
-    document.querySelector('.profile-pic').addEventListener('click', function() {
-        var logoutBar = document.getElementById('logout-bar');
-        logoutBar.style.display = (logoutBar.style.display === 'none' || logoutBar.style.display === '') ? 'block' : 'none';
-    });
+document.querySelector('.profile-pic').addEventListener('click', function() {
+    var logoutBar = document.getElementById('logout-bar');
+    logoutBar.style.display = (logoutBar.style.display === 'none' || logoutBar.style.display === '') ? 'block' : 'none';
+});
 
-    document.addEventListener('click', function(event) {
-        var isClickInside = document.querySelector('.profile-pic').contains(event.target) || document.getElementById('logout-bar').contains(event.target);
-        if (!isClickInside) {
-            document.getElementById('logout-bar').style.display = 'none';
-        }
-    });
+document.addEventListener('click', function(event) {
+    var isClickInside = document.querySelector('.profile-pic').contains(event.target) || document.getElementById('logout-bar').contains(event.target);
+    if (!isClickInside) {
+        document.getElementById('logout-bar').style.display = 'none';
+    }
+});
 </script>
 
 <style>

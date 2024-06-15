@@ -33,12 +33,12 @@ $bdd = connexionDB();
     </header>
     
     <div class="button-container">
-        <div class="div1">  <a href="gerer_enseignant.php" class="button">Modifier les  Enseignants</a> </div>
+        <div class="div1 ARM">  <a href="gerer_enseignant.php" class="button">Modifier les  Enseignants</a> </div>
       
-        <div class="div">
+        <div class="div ARM">
         <a href="gerer_ressource.php" class="button">Modifier les<br> ressources</a>
         </div>
-        <div class="div1">
+        <div class="div1 ARM">
         <a href="gerer_etudiant.php" class="button">Modifier les <br>
         Elèves</a>
         </div>
