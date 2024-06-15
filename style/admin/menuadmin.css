@@ -100,3 +100,11 @@ a {
     flex-direction: column;
     justify-content: center;
 }
+
+.ARM{
+    transition: transform 0.5s ease;
+}
+
+.ARM:hover{
+    transform:scale(1.2);
+}

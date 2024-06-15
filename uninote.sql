@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 07 juin 2024 à 17:09
--- Version du serveur : 10.4.28-MariaDB
--- Version de PHP : 8.2.4
+-- Généré le : sam. 15 juin 2024 à 01:13
+-- Version du serveur : 10.4.32-MariaDB
+-- Version de PHP : 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,12 +28,11 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `compte` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `nom` varchar(30) DEFAULT NULL,
   `prenom` varchar(30) DEFAULT NULL,
   `password` text DEFAULT NULL,
-  `niv_perm` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `niv_perm` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -41,7 +40,10 @@ CREATE TABLE `compte` (
 --
 
 INSERT INTO `compte` (`id`, `nom`, `prenom`, `password`, `niv_perm`) VALUES
-(1, 'AL SALTI', 'Nadia', '$2y$10$By240eFJbhk4CaeIwptnTukvdES/oA1YmXPhXAk2qXaKIC71mYWFG', 2);
+(1, 'AL SALTI', 'Nadia', '$2y$10$By240eFJbhk4CaeIwptnTukvdES/oA1YmXPhXAk2qXaKIC71mYWFG', 2),
+(2, 'ROURE', 'Vincent', '$2y$10$5J5WhEWu0aOgh.jCcZZd0.uEy.2yoAT/2erlLOrGpVpm9ntbxyZOG', 1),
+(3, 'CHEURFA', 'Liam', '$2y$10$wksMcbv4nCm1/MJzctxT4epyTWya7UM.Uq4nvFg6OA21bVdO996yq', 1),
+(4, 'CALZONE', 'Oscar', '$2y$10$kSyrAznQMv5Q1mOT7VtBqea8sYCm2ocIdTk6VeoZTCvH4cKEN.lZG', 1);
 
 -- --------------------------------------------------------
 
@@ -50,10 +52,9 @@ INSERT INTO `compte` (`id`, `nom`, `prenom`, `password`, `niv_perm`) VALUES
 --
 
 CREATE TABLE `enseignants` (
-  `id_ens` int(11) NOT NULL AUTO_INCREMENT,
+  `id_ens` int(11) NOT NULL,
   `num_tel` int(11) DEFAULT NULL,
-  `mail` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id_ens`)
+  `mail` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -61,7 +62,10 @@ CREATE TABLE `enseignants` (
 --
 
 INSERT INTO `enseignants` (`id_ens`, `num_tel`, `mail`) VALUES
-(1, 600000000, 'rien@gmail.com');
+(1, 600000000, 'rien@gmail.com'),
+(2, 0, 'adefinir@adressemail.com'),
+(3, 0, 'adefinir@adressemail.com'),
+(4, 0, 'adefinir@adressemail.com');
 
 -- --------------------------------------------------------
 
@@ -70,10 +74,18 @@ INSERT INTO `enseignants` (`id_ens`, `num_tel`, `mail`) VALUES
 --
 
 CREATE TABLE `etudiant` (
-  `id_etud` int(11) NOT NULL AUTO_INCREMENT,
-  `tp` varchar(1) DEFAULT NULL,
-  PRIMARY KEY (`id_etud`)
+  `id_etud` int(11) NOT NULL,
+  `promo` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `etudiant`
+--
+
+INSERT INTO `etudiant` (`id_etud`, `promo`) VALUES
+(2, 1),
+(3, 1),
+(4, 2);
 
 -- --------------------------------------------------------
 
@@ -82,13 +94,11 @@ CREATE TABLE `etudiant` (
 --
 
 CREATE TABLE `eval` (
-  `id_eval` int(11) NOT NULL AUTO_INCREMENT,
+  `id_eval` int(11) NOT NULL,
   `id_ressource` int(11) DEFAULT NULL,
   `coeff` float DEFAULT NULL,
   `intitule` varchar(50) DEFAULT NULL,
-  `date` datetime DEFAULT NULL,
-  PRIMARY KEY (`id_eval`),
-  KEY `id_ressource` (`id_ressource`)
+  `date` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -96,7 +106,13 @@ CREATE TABLE `eval` (
 --
 
 INSERT INTO `eval` (`id_eval`, `id_ressource`, `coeff`, `intitule`, `date`) VALUES
-(1, 1, 2, 'Compréhension orale', '2024-06-07 17:08:11');
+(1, 1, 2, 'Compréhension orale', '2024-06-07 17:08:11'),
+(3, 1, 2, 'Oral', '2024-06-09 22:56:33'),
+(6, NULL, NULL, NULL, '2024-06-14 18:46:51'),
+(7, 1, 2, 'Compréhension écrite', '2024-06-14 20:01:59'),
+(8, 1, 3, 'Evaluation', '2024-06-14 20:02:23'),
+(9, NULL, NULL, NULL, '2024-06-14 20:03:38'),
+(10, NULL, NULL, NULL, '2024-06-14 20:05:42');
 
 -- --------------------------------------------------------
 
@@ -106,9 +122,7 @@ INSERT INTO `eval` (`id_eval`, `id_ressource`, `coeff`, `intitule`, `date`) VALU
 
 CREATE TABLE `matiereens` (
   `id_ressource` int(11) NOT NULL,
-  `id_ens` int(11) NOT NULL,
-  PRIMARY KEY (`id_ressource`, `id_ens`),
-  KEY `id_ens` (`id_ens`)
+  `id_ens` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -116,7 +130,8 @@ CREATE TABLE `matiereens` (
 --
 
 INSERT INTO `matiereens` (`id_ressource`, `id_ens`) VALUES
-(1, 1);
+(1, 1),
+(2, 1);
 
 -- --------------------------------------------------------
 
@@ -127,10 +142,16 @@ INSERT INTO `matiereens` (`id_ressource`, `id_ens`) VALUES
 CREATE TABLE `notes` (
   `id_eval` int(11) NOT NULL,
   `id_etud` int(11) NOT NULL,
-  `note` float DEFAULT NULL,
-  PRIMARY KEY (`id_eval`, `id_etud`),
-  KEY `id_etud` (`id_etud`)
+  `note` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `notes`
+--
+
+INSERT INTO `notes` (`id_eval`, `id_etud`, `note`) VALUES
+(1, 2, 15),
+(1, 3, 17);
 
 -- --------------------------------------------------------
 
@@ -139,10 +160,9 @@ CREATE TABLE `notes` (
 --
 
 CREATE TABLE `promotions` (
-  `id_promo` int(11) NOT NULL AUTO_INCREMENT,
+  `id_promo` int(11) NOT NULL,
   `formation` varchar(50) DEFAULT NULL,
-  `annee_forma` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_promo`)
+  `annee_forma` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -150,7 +170,8 @@ CREATE TABLE `promotions` (
 --
 
 INSERT INTO `promotions` (`id_promo`, `formation`, `annee_forma`) VALUES
-(1, 'BUT MMI 1ere Année', 1);
+(1, 'BUT MMI 1ere Année', 1),
+(2, 'BUT GEA 1ere année', 1);
 
 -- --------------------------------------------------------
 
@@ -159,11 +180,9 @@ INSERT INTO `promotions` (`id_promo`, `formation`, `annee_forma`) VALUES
 --
 
 CREATE TABLE `ressource` (
-  `id_ressource` int(11) NOT NULL AUTO_INCREMENT,
+  `id_ressource` int(11) NOT NULL,
   `intitule` varchar(50) DEFAULT NULL,
-  `ue` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_ressource`),
-  KEY `ue` (`ue`)
+  `ue` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -171,21 +190,9 @@ CREATE TABLE `ressource` (
 --
 
 INSERT INTO `ressource` (`id_ressource`, `intitule`, `ue`) VALUES
-(1, 'R101 - Anglais', 1);
-
--- --------------------------------------------------------
-
---
--- Structure de la table `tp`
---
-
-CREATE TABLE `tp` (
-  `id_tp` int(11) NOT NULL AUTO_INCREMENT,
-  `libelle` varchar(30) DEFAULT NULL,
-  `promotion` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_tp`),
-  KEY `promotion` (`promotion`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+(1, 'R101 - Anglais', 1),
+(2, 'Comptabilité', 2),
+(3, 'Intégration', 1);
 
 -- --------------------------------------------------------
 
@@ -194,11 +201,9 @@ CREATE TABLE `tp` (
 --
 
 CREATE TABLE `ue` (
-  `id_ue` int(11) NOT NULL AUTO_INCREMENT,
+  `id_ue` int(11) NOT NULL,
   `intitule` varchar(50) DEFAULT NULL,
-  `id_promo` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_ue`),
-  KEY `id_promo` (`id_promo`)
+  `id_promo` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -206,11 +211,128 @@ CREATE TABLE `ue` (
 --
 
 INSERT INTO `ue` (`id_ue`, `intitule`, `id_promo`) VALUES
-(1, 'Comprendre', 1);
+(1, 'Comprendre', 1),
+(2, 'Développer', 2);
+
+--
+-- Index pour les tables déchargées
+--
+
+--
+-- Index pour la table `compte`
+--
+ALTER TABLE `compte`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `enseignants`
+--
+ALTER TABLE `enseignants`
+  ADD PRIMARY KEY (`id_ens`);
+
+--
+-- Index pour la table `etudiant`
+--
+ALTER TABLE `etudiant`
+  ADD PRIMARY KEY (`id_etud`),
+  ADD KEY `fk_etudiant_promotions` (`promo`);
+
+--
+-- Index pour la table `eval`
+--
+ALTER TABLE `eval`
+  ADD PRIMARY KEY (`id_eval`),
+  ADD KEY `id_ressource` (`id_ressource`);
+
+--
+-- Index pour la table `matiereens`
+--
+ALTER TABLE `matiereens`
+  ADD PRIMARY KEY (`id_ressource`,`id_ens`),
+  ADD KEY `id_ens` (`id_ens`);
+
+--
+-- Index pour la table `notes`
+--
+ALTER TABLE `notes`
+  ADD PRIMARY KEY (`id_eval`,`id_etud`),
+  ADD KEY `id_etud` (`id_etud`);
+
+--
+-- Index pour la table `promotions`
+--
+ALTER TABLE `promotions`
+  ADD PRIMARY KEY (`id_promo`);
+
+--
+-- Index pour la table `ressource`
+--
+ALTER TABLE `ressource`
+  ADD PRIMARY KEY (`id_ressource`),
+  ADD KEY `ue` (`ue`);
+
+--
+-- Index pour la table `ue`
+--
+ALTER TABLE `ue`
+  ADD PRIMARY KEY (`id_ue`),
+  ADD KEY `id_promo` (`id_promo`);
+
+--
+-- AUTO_INCREMENT pour les tables déchargées
+--
+
+--
+-- AUTO_INCREMENT pour la table `compte`
+--
+ALTER TABLE `compte`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT pour la table `enseignants`
+--
+ALTER TABLE `enseignants`
+  MODIFY `id_ens` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT pour la table `etudiant`
+--
+ALTER TABLE `etudiant`
+  MODIFY `id_etud` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT pour la table `eval`
+--
+ALTER TABLE `eval`
+  MODIFY `id_eval` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT pour la table `promotions`
+--
+ALTER TABLE `promotions`
+  MODIFY `id_promo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT pour la table `ressource`
+--
+ALTER TABLE `ressource`
+  MODIFY `id_ressource` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT pour la table `ue`
+--
+ALTER TABLE `ue`
+  MODIFY `id_ue` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Contraintes pour les tables déchargées
 --
+
+--
+-- Contraintes pour la table `etudiant`
+--
+ALTER TABLE `etudiant`
+  ADD CONSTRAINT `fk_etudiant_promotions` FOREIGN KEY (`promo`) REFERENCES `promotions` (`id_promo`);
 
 --
 -- Contraintes pour la table `eval`
@@ -237,12 +359,6 @@ ALTER TABLE `notes`
 --
 ALTER TABLE `ressource`
   ADD CONSTRAINT `ressource_ibfk_1` FOREIGN KEY (`ue`) REFERENCES `ue` (`id_ue`);
-
---
--- Contraintes pour la table `tp`
---
-ALTER TABLE `tp`
-  ADD CONSTRAINT `tp_ibfk_1` FOREIGN KEY (`promotion`) REFERENCES `promotions` (`id_promo`);
 
 --
 -- Contraintes pour la table `ue`

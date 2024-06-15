@@ -22,9 +22,9 @@
 </header>
 <div class="Fond">
 <div class="bC">
-    <div class="div1"><a href="Rang.php" class="button">Voir le Rang</a></div>
-    <div class="div1"><a href="notes.php" class="button">Consulter les notes</a></div>
-    <div class="div1"><a href="UE.php" class="button">Voir les UE</a></div>
+    <div class="div1 ARM"><a href="Rang.php" class="button">Voir le Rang</a></div>
+    <div class="div1 ARM"><a href="notes.php" class="button">Consulter les notes</a></div>
+    <div class="div1 ARM"><a href="UE.php" class="button">Voir les UE</a></div>
 </div>
 </div>
 </body>

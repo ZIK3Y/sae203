@@ -63,15 +63,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Enseignant - Créer une évaluation</title>
+    <link href="../../style/enseignant/ModifierlesNotes.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </head>
 <body>
+<header>
+    <div class="headermain">
+        <div class="img0">
+            <a href="./AcceuilEleve.php"><img src="../../ressources/image/Logo.png" alt="Logo de l'entreprise" class="logo"></a>
+        </div>
+        <div class="img1">
+            <img src="../../ressources/image/personne.png" alt="Photo de profil" class="profile-pic">
+        </div>
+    </div>
+    <div class="logout-bar" id="logout-bar">
+            <a href="../logout.php">Déconnexion</a>
+        </div>
+</header>
 
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ajouterEval" data-bs-whatever="@getbootstrap">Ajouter une évaluation</button>
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ajouterEval" data-bs-whatever="@getbootstrap">Supprimer une évaluation</button>
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ajouterEval" data-bs-whatever="@getbootstrap">Modifier une évaluation</button>
-
+<div class="Fond">
+<!-- Pop up -->
     <div class="modal fade" id="ajouterEval" tabindex="-1" aria-labelledby="ajouterEvalLabel" aria-hidden="true">
     <div class="modal-dialog">
     <form action='notes.php' method='POST'>
@@ -130,16 +142,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </form>
     </div>
     </div>
+<!-- Pop up -->
 
-    
 
-        <div class="container mt-4">
+
+<divencadrement class="encadrage">
+        <diventre class="row justify-content-between">
+            <divdeblock class="col-md-5 box-left">
+            <divdepliant class="div3 alignement">
+<!-- Depliant -->
+        <div class="container mt-4 bordure">
         <div class="accordion" id="ressourceAccordion">
             <?php
                 if ($reponse) {
                     foreach ($rows as $ressource) {
                         $ressourceId = $ressource['id_ressource'];
-                        echo '<div class="accordion-item">';
+                        echo '<div class="accordion-item Fonddéroulant">';
                         echo '<h2 class="accordion-header" id="heading' . $ressourceId . '">';
                         echo '<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse' . $ressourceId . '" aria-expanded="true" aria-controls="collapse' . $ressourceId . '">';
                         echo $ressource['intitule'] . " | Promotion : " . $row['formation'];
@@ -156,7 +174,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $evals = $stmtEval->fetchAll(PDO::FETCH_ASSOC);
                         if ($evals) {
                             foreach ($evals as $eval) {
-                                echo '<li class="list-group-item"><a href="notes.php?id_eval=' . $eval['id_eval'] . '">' . $eval['intitule'] . '</a> | Coefficient : ' . $eval['coeff'] . ' | Date : ' . $eval['date'] . '</li>';
+                                echo '<li class="list-group-item"><a class="lien" href="notes.php?id_eval=' . $eval['id_eval'] . '">' . $eval['intitule'] . '</a> | Coefficient : ' . $eval['coeff'] . ' | Date : ' . $eval['date'] . '</li>';
                             }
                         } else {
                             echo '<li class="list-group-item">Aucune évaluation trouvée.</li>';
@@ -170,7 +188,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ?>
         </div>
     </div>
-    
+<!-- Depliant -->
+</divdepliant>
+<br>
+<divbouton class="alignement2">
+<!-- Boutons -->
+<button type="button" class="btn btn-success buttonaffichage" data-bs-toggle="modal" data-bs-target="#ajouterEval" data-bs-whatever="@getbootstrap">Ajouter une évaluation</button>
+    <button type="button" class="btn btn-success buttonaffichage" data-bs-toggle="modal" data-bs-target="#ajouterEval" data-bs-whatever="@getbootstrap">Supprimer une évaluation</button>
+    <button type="button" class="btn btn-success buttonaffichage" data-bs-toggle="modal" data-bs-target="#ajouterEval" data-bs-whatever="@getbootstrap">Modifier une évaluation</button>
+<!-- Boutons -->
+</divbouton>
+            </divdeblock>
+            <divdeblock class="col-md-5 box-right">
+            <divaffichage>
+<!-- Afficher -->
     <div class="container mt-4">
     <?php
     if ($_SERVER["REQUEST_METHOD"] === 'GET' && isset($_GET['id_eval'])) {
@@ -194,7 +225,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($eleves) {
             echo '<form action="notes.php" method="POST">';
             echo '<input type="hidden" name="id_eval" value="' . $id_eval . '">';
-            echo '<table class="table">';
+            echo '<table class="table Matable">';
             echo '<tr><th>Identité</th><th>Note</th></tr>';
             foreach ($eleves as $eleve) {
                 $note = isset($eleve['note']) ? $eleve['note'] : '';
@@ -204,7 +235,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo '</tr>';
             }
             echo '</table>';
-            echo '<button type="submit" class="btn btn-primary">Enregistrer les notes</button>';
+            echo '<button type="submit" class="btn btn-success buttonaffichage">Enregistrer les notes</button>';
             echo '</form>';
         } else {
             echo '<p>Aucun élève trouvé pour cette évaluation.</p>';
@@ -212,6 +243,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     ?>
 </div>
+<!-- Afficher -->
+</divaffichage>
+            </divdeblock>
+        </diventre>
+    </divencadrement>
 
+</div>
 </body>
 </html>
+
+<!-- ici c'est le script js pour la deconnexion et sont css en dessous -->
+<script>
+    document.querySelector('.profile-pic').addEventListener('click', function() {
+        var logoutBar = document.getElementById('logout-bar');
+        logoutBar.style.display = (logoutBar.style.display === 'none' || logoutBar.style.display === '') ? 'block' : 'none';
+    });
+
+    document.addEventListener('click', function(event) {
+        var isClickInside = document.querySelector('.profile-pic').contains(event.target) || document.getElementById('logout-bar').contains(event.target);
+        if (!isClickInside) {
+            document.getElementById('logout-bar').style.display = 'none';
+        }
+    });
+</script>
+
+<style>
+        .logout-bar {
+            display: none;
+            position: absolute;
+            right: 10px;
+            top: 140px; /* Ajustez selon la hauteur de votre header */
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .logout-bar a {
+            text-decoration: none;
+            color: #000;
+        }
+    </style>
+
+<!-- ici c'est le script js pour la deconnexion et sont css en dessous //>
