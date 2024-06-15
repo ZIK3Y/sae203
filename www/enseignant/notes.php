@@ -193,9 +193,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <br>
 <divbouton class="alignement2">
 <!-- Boutons -->
-<button type="button" class="btn btn-success buttonaffichage" data-bs-toggle="modal" data-bs-target="#ajouterEval" data-bs-whatever="@getbootstrap">Ajouter une évaluation</button>
-    <button type="button" class="btn btn-success buttonaffichage" data-bs-toggle="modal" data-bs-target="#ajouterEval" data-bs-whatever="@getbootstrap">Supprimer une évaluation</button>
-    <button type="button" class="btn btn-success buttonaffichage" data-bs-toggle="modal" data-bs-target="#ajouterEval" data-bs-whatever="@getbootstrap">Modifier une évaluation</button>
+    <a class="btn btn-primary buttonaffichage" id="ajouterEval" href="ajouter_note.php" role="button">Ajouter une évaluation</a>
+    <a class="btn btn-primary buttonaffichage" id="modifierEval" href="modifier_note.php" role="button">Modifier une évaluation</a>
+    <a class="btn btn-primary buttonaffichage" id="supprimerEval" href="supprimer_note.php" role="button">Supprimer une évaluation</a>
 <!-- Boutons -->
 </divbouton>
             </divdeblock>
