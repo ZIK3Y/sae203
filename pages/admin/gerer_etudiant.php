@@ -4,7 +4,8 @@
     <link rel="stylesheet" href="../../style/admin/gerer_enseignant.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UniNote</title>
+    <link rel="icon" type="image/png" href="../../ressources/image/logo.png">
+    <title>UniNote - Gérer les étudiants</title>
 </head>
 <body>
     <header>
@@ -15,8 +16,8 @@
             <div id="list">
                 <ul>
                     <li><a href="dashbord.php" class="button-23">Admin Dashboard</a></li>
-                    <li><a href="gerer_etudiant.php" class="button-23">Gérer les étudiants</a></li>
-                    <li><a href="gerer_ressource.php" class="button-23">Gérer les ressources</a></li>
+                    <li><a href="gerer_enseignant.php" class="button-23">Gérer les Enseignants</a></li>
+                    <li><a href="gerer_ressource.php" class="button-23">Gérer les ressources</a></li> 
                 </ul>
             </div>
             <div class="img1">
@@ -28,42 +29,53 @@
         </div>
     </header>
     <div class="div46">
-        <h1>Liste des Enseignants</h1>
+        <h1>Liste des Étudiants</h1>
     </div>
     <div class="div45">
-        <a href="./ajouter_enseignant.php" class="button-22" id="buttonenseignant">Ajouter Enseignant</a>
+        <a href="./ajouter_etudiant.php" class="button-22" id="buttonenseignant">Ajouter Étudiant</a>
     </div>
-    
+
     <?php
+    session_start();
     require '../config.php';
 
     $connect = connexionDB();
 
-    $req = "SELECT cpt.id, cpt.nom, cpt.prenom, cpt.password, cpt.niv_perm, ens.num_tel, ens.mail 
+    error_reporting(0);
+    $perm = $_SESSION['perm'];
+
+    if (!isset($_SESSION['user']) || $perm != 3) {
+        header('Location: ../../index.php');
+        exit();
+}
+
+    $req = "SELECT cpt.id, cpt.nom, cpt.prenom, cpt.password, cpt.niv_perm, etu.promo 
             FROM compte cpt 
-            JOIN enseignants ens ON cpt.id = ens.id_ens 
-            WHERE cpt.niv_perm = 2";          
+            JOIN etudiant etu ON cpt.id = etu.id_etud 
+            WHERE cpt.niv_perm = 1";          
     
     $pdoreq = $connect->query($req);          
 
     $pdoreq->setFetchMode(PDO::FETCH_ASSOC);    
 
+    // Début du tableau   
     echo "<table class='styled-table' border='1'>";     
-    echo "<tr><th>Id</th><th>Nom</th><th>Prénom</th><th>N° de Téléphone</th><th>Adresse mail</th><th>Password</th><th>Niveau Permission</th><th>Actions</th></tr>";          
+    echo "<tr><th>Id</th><th>Nom</th><th>Prénom</th><th>promotion</th><th>Password</th><th>Niveau Permission</th><th>Actions</th></tr>";          
 
+    // Parcours du tableau  
     foreach ($pdoreq as $ligne) {         
         echo "<tr id='row-" . $ligne['id'] . "'>";         
         echo "<td>" . $ligne['id'] . "</td>";         
         echo "<td>" . $ligne['nom'] . "</td>";         
         echo "<td>" . $ligne['prenom'] . "</td>";
-        echo "<td>" . $ligne['num_tel'] . "</td>";
-        echo "<td>" . $ligne['mail'] . "</td>";       
+        echo "<td>" . $ligne['promo'] . "</td>";       
         echo "<td>" . $ligne['password'] . "</td>";         
         echo "<td>" . $ligne['niv_perm'] . "</td>";        
-        echo "<td><div class='divbouton'><a href='modifierens.php?id=" . $ligne['id'] . "' class='boutonmodifier'>Modifier</a><button class='boutonsupprimer' type='button' onclick='suppr(" . $ligne['id'] . ")'>Supprimer</button></div></td>";   
+        echo "<td><div class='divbouton'><a href='modifieretu.php?id=" . $ligne['id'] . "' class='boutonmodifier'>Modifier</a><button class='boutonsupprimer' type='button' onclick='suppr(" . $ligne['id'] . ")'>Supprimer</button></div></td>";   
         echo "</tr>";     
     }     
 
+    // Fin du tableau     
     echo "</table>"; 
     ?>
 </body>
@@ -74,7 +86,7 @@ function suppr(id) {
     if (confirm("Voulez-vous supprimer la ligne?")) {
         // Supprimer de la bdd via ajax
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "supprimerens.php", true);
+        xhr.open("POST", "supprimeretu.php", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4 && xhr.status === 200) {
@@ -114,7 +126,7 @@ document.addEventListener('click', function(event) {
     display: none;
     position: absolute;
     right: 10px;
-    top: 140px; 
+    top: 140px;
     background-color: #fff;
     border: 1px solid #ccc;
     padding: 10px;

@@ -3,7 +3,13 @@ session_start();
 
 require '../config.php';
 $pdo = connexionDB();
+error_reporting(0);
+$perm = $_SESSION['perm'];
 
+if (!isset($_SESSION['user']) || $perm != 3) {
+    header('Location: ../../index.php');
+    exit();
+}
 // Récupérer la liste des promotions depuis la base de données
 $stmt_promotions = $pdo->query('SELECT * FROM promotions');
 $promotions_list = $stmt_promotions->fetchAll(PDO::FETCH_ASSOC); // Renommage de la variable pour éviter le conflit
@@ -37,7 +43,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../style/admin/gerer_enseignant.css">
-    <title>Ajouter une Ressource</title>
+    <link rel="icon" type="image/png" href="../../ressources/image/logo.png">
+    <title>UniNote - Ajouter une Ressource</title>
     <style>
         /* Styles spécifiques à la page */
         /* Tu peux ajouter tes styles CSS ici */

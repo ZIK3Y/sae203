@@ -1,13 +1,17 @@
 <?php
-
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
+session_start();
 
 require '../config.php';
 
 $connect = connexionDB();
+
+error_reporting(0);
+$perm = $_SESSION['perm'];
+
+if (!isset($_SESSION['user']) || $perm != 3) {
+    header('Location: ../../index.php');
+    exit();
+}
 
 
 $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);

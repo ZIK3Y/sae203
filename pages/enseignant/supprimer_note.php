@@ -8,7 +8,7 @@ $id = $_SESSION['user'];
 $prem = $_SESSION['perm'];
 
 if(!isset($id) || $prem!=2) {
-    header('Location : ../login.php');
+    header('Location : ../../index.php');
     exit();
 }
 
@@ -23,8 +23,6 @@ if($_SERVER['REQUEST_METHOD']==='POST') {
     exit();
 }
 
-
-
 ?>
 
 <!DOCTYPE html>
@@ -32,9 +30,10 @@ if($_SERVER['REQUEST_METHOD']==='POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Supprimer une évaluation</title>
+    <title>UniNote - Supprimer une évaluation</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link rel="icon" type="image/png" href="../../ressources/image/logo.png">
 </head>
 <body>
 <div class="container">

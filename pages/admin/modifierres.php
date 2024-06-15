@@ -1,12 +1,16 @@
 <?php
+session_start();
 require '../config.php';
 
-// Afficher les erreurs pour le débogage
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 $pdo = connexionDB();
+
+error_reporting(0);
+$perm = $_SESSION['perm'];
+
+if (!isset($_SESSION['user']) || $perm != 3) {
+    header('Location: ../../index.php');
+    exit();
+}
 
 if (isset($_GET['id'])) {
     $stmt = $pdo->prepare('SELECT * FROM ressource WHERE id_ressource = ?');
@@ -69,7 +73,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Modifier une Ressource</title>
+    <link rel="icon" type="image/png" href="../../ressources/image/logo.png">
+    <title>UniNote - Modifier une Ressource</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>

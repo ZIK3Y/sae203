@@ -8,7 +8,7 @@ error_reporting(0);
 $perm = $_SESSION['perm'];
 
 if (!isset($_SESSION['user']) || $perm != 2) {
-    header('Location: ../login.php');
+    header('Location: ../../../index.php');
     exit();
 }
 
@@ -62,16 +62,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enseignant - Créer une évaluation</title>
+    <title>UniNote - Mes évaluations</title>
     <link href="../../style/enseignant/ModifierlesNotes.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link rel="icon" type="image/png" href="../../ressources/image/logo.png">
 </head>
 <body>
 <header>
     <div class="headermain">
         <div class="img0">
-            <a href="./AcceuilEleve.php"><img src="../../ressources/image/Logo.png" alt="Logo de l'entreprise" class="logo"></a>
+            <img src="../../ressources/image/Logo.png" alt="Logo de l'entreprise" class="logo">
         </div>
         <div class="img1">
             <img src="../../ressources/image/personne.png" alt="Photo de profil" class="profile-pic">

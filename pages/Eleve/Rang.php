@@ -3,6 +3,13 @@ session_start();
 
 require '../config.php';
 $bdd = connexionDB();
+error_reporting(0);
+$perm = $_SESSION['perm'];
+
+if (!isset($_SESSION['user']) || $perm != 1) {
+    header('Location: ../../index.php');
+    exit();
+}
 
 $id = $_SESSION['user'];
 
@@ -34,14 +41,15 @@ $pos = 1;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>UniNote - Mon rang</title>
     <link rel="stylesheet" href="../../style/eleve/Rang.css">
+    <link rel="icon" type="image/png" href="../../ressources/image/logo.png">
 </head>
 <body>
 <header>
     <div class="EP">
         <div class="img0">
-            <a href="AcceuilEleve.php">
+            <a href="accueil.php">
                 <img src="../../ressources/image/Logo.png" alt="Logo de l'entreprise" class="logo">
             </a>
         </div>

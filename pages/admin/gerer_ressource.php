@@ -4,7 +4,8 @@
     <link rel="stylesheet" href="../../style/admin/gerer_enseignant.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UniNote</title>
+    <link rel="icon" type="image/png" href="../../ressources/image/logo.png">
+    <title>UniNote - Gérer les ressources</title>
 </head>
 <body>
     <header>
@@ -35,10 +36,17 @@
     </div>
     
     <?php
+    session_start();
     require '../config.php';
 
     $connect = connexionDB();
-
+    error_reporting(0);
+    $perm = $_SESSION['perm'];
+    
+    if (!isset($_SESSION['user']) || $perm != 3) {
+        header('Location: ../../index.php');
+        exit();
+    }
     $req = "SELECT res.id_ressource, res.intitule, res.ue, ens.id_ens, ens.mail 
             FROM ressource res 
             LEFT JOIN matiereens me ON res.id_ressource = me.id_ressource 

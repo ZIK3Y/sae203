@@ -5,8 +5,15 @@ require '../config.php';
 
 $bdd = connexionDB();
 
-$id = $_SESSION['user'];
+error_reporting(0);
 $perm = $_SESSION['perm'];
+
+if (!isset($_SESSION['user']) || $perm != 1) {
+    header('Location: ../../index.php');
+    exit();
+}
+
+$id = $_SESSION['user'];
 
 $requeteUE = $bdd->prepare('SELECT ue.id_ue, ue.intitule, AVG(n.note) AS moyenne
                             FROM etudiant etu
@@ -28,14 +35,15 @@ $resultatUE = $requeteUE->fetchAll(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>UniNote - Unités d'enseignements</title>
     <link rel="stylesheet" href="../../style/eleve/UE.css">
+    <link rel="icon" type="image/png" href="../../ressources/image/logo.png">
 </head>
 <body>
 <header>
         <div class="headermain">
             <div class="img0">
-               <a href="./AcceuilEleve.php"> <img src="../../ressources/image/Logo.png" alt="Logo de l'entreprise" class="logo"></a>
+               <a href="./accueil.php"> <img src="../../ressources/image/Logo.png" alt="Logo de l'entreprise" class="logo"></a>
             </div>
      
             <div id="list">
@@ -57,7 +65,7 @@ $resultatUE = $requeteUE->fetchAll(PDO::FETCH_ASSOC);
 
 <div class="button-container">
 <?php
-    if (isset($resultatUE)) {
+    if(isset($resultatUE)) {
         foreach ($resultatUE as $ue) {
             $moyenne = round($ue['moyenne'], 2);
             $class = '';
@@ -73,7 +81,7 @@ $resultatUE = $requeteUE->fetchAll(PDO::FETCH_ASSOC);
             echo '<p class="A">' . $ue['intitule'] . '</p>';
             echo '</div>';
         }
-    }
+    } 
     ?>
 </div>
 

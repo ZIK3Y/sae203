@@ -8,7 +8,7 @@ $conn = connexionDB();
 $perm = $_SESSION['perm'];
 
 if (!isset($_SESSION['user']) || $perm != 1) {
-    header('Location: ../login.php');
+    header('Location: ../../index.php');
     exit();
 }
 
@@ -52,17 +52,18 @@ if($_SERVER['REQUEST_METHOD']==='GET') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Voir ses notes</title>
+    <title>UniNote - Mes notes</title>
     <link href="../../style/eleve/Consulterlesnotes.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-</head>
+    <link rel="icon" type="image/png" href="../../ressources/image/logo.png">
+  </head>
 <body>
 
 <header>
     <div class="EP">
         <div class="img0">
-            <a href="AcceuilEleve.php">
+            <a href="accueil.php">
                 <img src="../../ressources/image/Logo.png" alt="Logo de l'entreprise" class="logo">
             </a>
         </div>

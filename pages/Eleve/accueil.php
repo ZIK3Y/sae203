@@ -1,16 +1,32 @@
+<?php
+session_start();
+
+require '../config.php';
+$bdd = connexionDB();
+
+error_reporting(0);
+$perm = $_SESSION['perm'];
+
+if (!isset($_SESSION['user']) || $perm != 1) {
+    header('Location: ../../index.php');
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UniNote</title>
+    <title>UniNote - Étudiant</title>
     <link rel="stylesheet" href="../../style/eleve/AcceuilEleve.css">
+    <link rel="icon" type="image/png" href="../../ressources/image/logo.png">
 </head>
 <body>
 <header>
     <div class="headermain">
         <div class="img0">
-            <a href="./AcceuilEleve.php"><img src="../../ressources/image/Logo.png" alt="Logo de l'entreprise" class="logo"></a>
+            <a href="./accueil.php"><img src="../../ressources/image/Logo.png" alt="Logo de l'entreprise" class="logo"></a>
         </div>
         <div class="img1">
             <img src="../../ressources/image/personne.png" alt="Photo de profil" class="profile-pic">

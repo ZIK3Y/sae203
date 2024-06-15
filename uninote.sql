@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : sam. 15 juin 2024 à 01:13
+-- Généré le : sam. 15 juin 2024 à 21:11
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -42,8 +42,8 @@ CREATE TABLE `compte` (
 INSERT INTO `compte` (`id`, `nom`, `prenom`, `password`, `niv_perm`) VALUES
 (1, 'AL SALTI', 'Nadia', '$2y$10$By240eFJbhk4CaeIwptnTukvdES/oA1YmXPhXAk2qXaKIC71mYWFG', 2),
 (2, 'ROURE', 'Vincent', '$2y$10$5J5WhEWu0aOgh.jCcZZd0.uEy.2yoAT/2erlLOrGpVpm9ntbxyZOG', 1),
-(3, 'CHEURFA', 'Liam', '$2y$10$wksMcbv4nCm1/MJzctxT4epyTWya7UM.Uq4nvFg6OA21bVdO996yq', 1),
-(4, 'CALZONE', 'Oscar', '$2y$10$kSyrAznQMv5Q1mOT7VtBqea8sYCm2ocIdTk6VeoZTCvH4cKEN.lZG', 1);
+(3, 'ZAIDI', 'Fares', '$2y$10$FxocsQtL5g.rM30CXDjvGemDhvCZGYz2MYNVSLPQR9yVLJC0bYQMC', 3),
+(4, 'CHEURFA', 'Liam', '$2y$10$ffLT72Kwt7UmybSgEA3Dle/PL91UeHishQCBeJGC5FPncJLLDMHnm', 1);
 
 -- --------------------------------------------------------
 
@@ -84,8 +84,7 @@ CREATE TABLE `etudiant` (
 
 INSERT INTO `etudiant` (`id_etud`, `promo`) VALUES
 (2, 1),
-(3, 1),
-(4, 2);
+(4, 1);
 
 -- --------------------------------------------------------
 
@@ -112,7 +111,13 @@ INSERT INTO `eval` (`id_eval`, `id_ressource`, `coeff`, `intitule`, `date`) VALU
 (7, 1, 2, 'Compréhension écrite', '2024-06-14 20:01:59'),
 (8, 1, 3, 'Evaluation', '2024-06-14 20:02:23'),
 (9, NULL, NULL, NULL, '2024-06-14 20:03:38'),
-(10, NULL, NULL, NULL, '2024-06-14 20:05:42');
+(10, NULL, NULL, NULL, '2024-06-14 20:05:42'),
+(11, 3, 2, 'Javascript', '2024-06-15 18:34:26'),
+(12, 4, 4, 'Table de jardin', '2024-06-15 18:34:43'),
+(13, 5, 3, 'PHP', '2024-06-15 18:34:58'),
+(14, 6, 2, 'Displate', '2024-06-15 18:35:10'),
+(15, 7, 2, 'Verbes', '2024-06-15 18:35:23'),
+(16, 7, 2, 'DST 1', '2024-06-15 21:06:46');
 
 -- --------------------------------------------------------
 
@@ -131,7 +136,12 @@ CREATE TABLE `matiereens` (
 
 INSERT INTO `matiereens` (`id_ressource`, `id_ens`) VALUES
 (1, 1),
-(2, 1);
+(2, 1),
+(3, 1),
+(4, 1),
+(5, 1),
+(6, 1),
+(7, 1);
 
 -- --------------------------------------------------------
 
@@ -142,7 +152,7 @@ INSERT INTO `matiereens` (`id_ressource`, `id_ens`) VALUES
 CREATE TABLE `notes` (
   `id_eval` int(11) NOT NULL,
   `id_etud` int(11) NOT NULL,
-  `note` int(11) DEFAULT NULL
+  `note` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -150,8 +160,8 @@ CREATE TABLE `notes` (
 --
 
 INSERT INTO `notes` (`id_eval`, `id_etud`, `note`) VALUES
-(1, 2, 15),
-(1, 3, 17);
+(1, 2, 17),
+(1, 4, 12);
 
 -- --------------------------------------------------------
 
@@ -192,7 +202,11 @@ CREATE TABLE `ressource` (
 INSERT INTO `ressource` (`id_ressource`, `intitule`, `ue`) VALUES
 (1, 'R101 - Anglais', 1),
 (2, 'Comptabilité', 2),
-(3, 'Intégration', 1);
+(3, 'Intégration', 1),
+(4, 'Production 3D', 3),
+(5, 'Développement Web', 4),
+(6, 'Stratégie Marketing', 5),
+(7, 'Expression communication et réthorique', 6);
 
 -- --------------------------------------------------------
 
@@ -212,7 +226,11 @@ CREATE TABLE `ue` (
 
 INSERT INTO `ue` (`id_ue`, `intitule`, `id_promo`) VALUES
 (1, 'Comprendre', 1),
-(2, 'Développer', 2);
+(2, 'Développer', 2),
+(3, 'Concevoir', 1),
+(4, 'Développer', 1),
+(5, 'Entreprendre', 1),
+(6, 'Exprimer', 1);
 
 --
 -- Index pour les tables déchargées
@@ -286,7 +304,7 @@ ALTER TABLE `ue`
 -- AUTO_INCREMENT pour la table `compte`
 --
 ALTER TABLE `compte`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pour la table `enseignants`
@@ -304,7 +322,7 @@ ALTER TABLE `etudiant`
 -- AUTO_INCREMENT pour la table `eval`
 --
 ALTER TABLE `eval`
-  MODIFY `id_eval` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_eval` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT pour la table `promotions`
@@ -316,13 +334,13 @@ ALTER TABLE `promotions`
 -- AUTO_INCREMENT pour la table `ressource`
 --
 ALTER TABLE `ressource`
-  MODIFY `id_ressource` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_ressource` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT pour la table `ue`
 --
 ALTER TABLE `ue`
-  MODIFY `id_ue` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_ue` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Contraintes pour les tables déchargées

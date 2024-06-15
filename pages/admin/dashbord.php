@@ -1,11 +1,29 @@
+<?php
+session_start();
+require '../config.php';
+
+error_reporting(0);
+
+$perm = $_SESSION['perm'];
+
+if (!isset($_SESSION['user']) || $perm != 3) {
+    header('Location: ../../index.php');
+    exit();
+}
+
+$bdd = connexionDB();
+?>
+
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<link rel="stylesheet" href="../../style/enseignant/menuenseignant.css">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UniNote</title>
-</head>
+<link rel="stylesheet" href="../../style/admin/menuadmin.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../../ressources/image/logo.png">
+    <title>UniNote - Administrateur</title>
+   
 <body>
     <header>
         <img src="../../ressources/image/Logo.png" alt="Logo de l'entreprise" class="logo">
@@ -16,25 +34,20 @@
     </header>
     
     <div class="button-container">
-        <div class="div1">  <a href="Paramètre.php" class="button">Paramètre</a>
-    </div>
+        <div class="div1 ARM">  <a href="gerer_enseignant.php" class="button">Modifier les  Enseignants</a> </div>
       
-        <div class="div2">
-        <a href="notes.php" class="button">Modifier <br>les <br>Notes</a>
+        <div class="div ARM">
+        <a href="gerer_ressource.php" class="button">Modifier les<br> ressources</a>
         </div>
-        <div class="div1">
-        <a href="VotreCompte.php" class="button">Votre Compte</a>
+        <div class="div1 ARM">
+        <a href="gerer_etudiant.php" class="button">Modifier les <br>
+        Elèves</a>
         </div>
         
     </div>
-    <hr>
+   
 </body>
 </html>
-
-
-
-
-
 
 <!-- ici c'est le script js pour la deconnexion et sont css en dessous -->
 <script>
@@ -69,3 +82,5 @@
     </style>
 
 <!-- ici c'est le script js pour la deconnexion et sont css en dessous //>
+
+
