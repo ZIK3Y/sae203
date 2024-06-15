@@ -45,7 +45,6 @@ if($_SERVER['REQUEST_METHOD']==='GET') {
         $resultatMoyenne = $requeteMoyenne->fetchAll(PDO::FETCH_ASSOC);
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -54,17 +53,44 @@ if($_SERVER['REQUEST_METHOD']==='GET') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Voir ses notes</title>
+    <link href="../../style/eleve/Consulterlesnotes.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="container mt-4">
+
+<header>
+    <div class="EP">
+        <div class="img0">
+            <a href="AcceuilEleve.php">
+                <img src="../../ressources/image/Logo.png" alt="Logo de l'entreprise" class="logo">
+            </a>
+        </div>
+        <div id="liste">
+            <ul>
+                <li><a href="Rang.php" class="bouton-23">Voir le Rang</a></li>
+                <li><a href="UE.php" class="bouton-23">Voir les UE</a></li>
+            </ul>
+        </div>
+        <div class="IC">
+            <img src="../../ressources/image/personne.png" alt="Photo de profil" class="photo-profil">
+        </div>
+    </div>
+    <div class="logout-bar" id="logout-bar">
+            <a href="../logout.php">Déconnexion</a>
+        </div>
+</header>
+
+<div class="Placementencadrement">
+<div class="BG">
+<!-- Ressources -->
+    <div class="container mt-4 s">
         <div class="accordion" id="ressourceAccordion">
             <?php
                 if ($reponse) {
                     foreach ($resultatRessource as $ressource) {
                         $ressourceId = $ressource['id_ressource'];
-                        echo '<div class="accordion-item">';
+                        echo '<div class="accordion-item Fonddéroulant">';
                         echo '<h2 class="accordion-header" id="heading' . $ressourceId . '">';
                         echo '<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse' . $ressourceId . '" aria-expanded="true" aria-controls="collapse' . $ressourceId . '">';
                         echo $ressource['intitule'] . " | Promotion : " . $ressource['formation'];
@@ -95,38 +121,33 @@ if($_SERVER['REQUEST_METHOD']==='GET') {
             ?>
         </div>
     </div>
+<!-- Ressources -->
+</div>
 
-    <div class="container mt-4">
-    <table class="table mt-4">
-                <tr>
-                    <th>
-                        Votre note :
-                    </th>
-                    <th>
-                        Moyenne de la classe :
-                    </th>
-                </tr>
-    <?php
-    $requeteNote = $conn->prepare('SELECT e.coeff, e.intitule, e.id_eval, n.note, r.intitule AS matiere FROM eval e JOIN notes n ON e.id_eval = n.id_eval JOIN etudiant etu ON n.id_etud = etu.id_etud JOIN ressource r ON e.id_ressource = r.id_ressource WHERE e.id_eval = :id AND etu.id_etud = :etudiant');
-    $requeteNote->bindParam(':id', $idEval);
-    $requeteNote->bindParam(':etudiant', $id);
-    $requeteNote->execute();
+<div class="BD">
 
-    $resultatNote = $requeteNote->fetchAll(PDO::FETCH_ASSOC);
+<!-- Tableau notes -->
+<?php
+  $requeteNote = $conn->prepare('SELECT e.coeff, e.intitule, e.id_eval, n.note, r.intitule AS matiere FROM eval e JOIN notes n ON e.id_eval = n.id_eval JOIN etudiant etu ON n.id_etud = etu.id_etud JOIN ressource r ON e.id_ressource = r.id_ressource WHERE e.id_eval = :id AND etu.id_etud = :etudiant');
+  $requeteNote->bindParam(':id', $idEval);
+  $requeteNote->bindParam(':etudiant', $id);
+  $requeteNote->execute();
+
+  $resultatNote = $requeteNote->fetchAll(PDO::FETCH_ASSOC);
     
-    if(isset($resultatNote)) {
-        foreach($resultatNote as $note) {
-            echo '<tr><td>' . $note['note'] . '/20</td><td></td></tr>';
+  if(isset($resultatNote)) {
+    foreach($resultatNote as $note) {
 
-        }
-    } else {
-        echo "<tr><td>Il n'y a aucune note sur cette évalutaion !</td><td></td></tr>" ;
-    }
-    ?>
-        </table>
-    </div>
+      }
+  } else {
+      echo "Il n'y a aucune note sur cette évaluation !" ;
+  }
+?>
+<!-- Tableau notes -->
 
-    
+
+
+<!-- Charts JS-->
 <div class="PD">
   <div class="div11">
     <form>
@@ -134,22 +155,36 @@ if($_SERVER['REQUEST_METHOD']==='GET') {
     </form>
     </div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <div class="binfo">
-            <div><?php echo $note['intitule']; ?></div>
-            <div>Votre Note : <span class="VN"><?php foreach($resultatNote as $note) { echo $note['note']; } ?></span></div>
-            <div>Moyenne de la classe : <span class="MC"><?php echo isset($resultatMoyenne[0]['moyenne_notes']) ? $resultatMoyenne[0]['moyenne_notes'] : 0; ?></span></div>
+        <div class="binfo Bordure2">
+          <h1> <strong><?php echo $note['intitule']; ?></strong> </h1>
+          <strong> <div class="Taille">Votre Note : <span class="VN"><?php foreach($resultatNote as $note) { echo $note['note']; } ?></span></div></strong>
+          <strong> <div class="Taille">Moyenne de la classe : <span class="MC"><?php echo isset($resultatMoyenne[0]['moyenne_notes']) ? $resultatMoyenne[0]['moyenne_notes'] : 0; ?></span></div></strong>
             <div class="dinfo">
                 <div>
                     <h3>Coef :</h3>
-                    <p><?php foreach($resultatNote as $coeff) { echo $coeff['coeff']; } ?></p>
+                    <p class="Taille2"><?php foreach($resultatNote as $coeff) { echo $coeff['coeff']; } ?></p>
                 </div>
-                <div><?php echo $note['matiere']; ?></div>
+                <div class="Taille3"><?php echo $note['matiere']; ?></div>
             </div>
         </div>
     </div>
 </div>
+<!-- Charts JS-->
+
+
+
+</div>
+</div>
+
+</body>
+</html>
+
 <script>
-  const ctx = document.getElementById('myChart').getContext('2d');
+  const canvas = document.getElementById('myChart');
+  canvas.height = 450; // Ajustez cette valeur selon vos besoins
+  canvas.width = 400; // Ajustez cette valeur selon vos besoins, si nécessaire
+
+  const ctx = canvas.getContext('2d');
 
   new Chart(ctx, {
     type: 'bar',
@@ -160,14 +195,14 @@ if($_SERVER['REQUEST_METHOD']==='GET') {
           label: 'Votre note',
           data: [<?php echo $note['note'] ?>],
           borderColor: '#36A2EB',
-          backgroundColor: '#DDEAD7',
+          backgroundColor: 'rgb(0, 102, 255)',
           barThickness: 60,
         },
         {
           label: 'Moyenne de la classe',
           data: [<?php echo isset($resultatMoyenne[0]['moyenne_notes']) ? $resultatMoyenne[0]['moyenne_notes'] : 0; ?>],
           borderColor: '#FF6384',
-          backgroundColor: '#FFB1C1',
+          backgroundColor: 'rgb(216, 14, 0)',
           barThickness: 30,
         }
       ]
@@ -206,7 +241,38 @@ if($_SERVER['REQUEST_METHOD']==='GET') {
     }
   });
 </script>
-    
-    
-</body>
-</html>
+
+
+<!-- ici c'est le script js pour la deconnexion et sont css en dessous -->
+<script>
+    document.querySelector('.profile-pic').addEventListener('click', function() {
+        var logoutBar = document.getElementById('logout-bar');
+        logoutBar.style.display = (logoutBar.style.display === 'none' || logoutBar.style.display === '') ? 'block' : 'none';
+    });
+
+    document.addEventListener('click', function(event) {
+        var isClickInside = document.querySelector('.profile-pic').contains(event.target) || document.getElementById('logout-bar').contains(event.target);
+        if (!isClickInside) {
+            document.getElementById('logout-bar').style.display = 'none';
+        }
+    });
+</script>
+
+<style>
+        .logout-bar {
+            display: none;
+            position: absolute;
+            right: 10px;
+            top: 140px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .logout-bar a {
+            text-decoration: none;
+            color: #000;
+        }
+    </style>
+
+<!-- ici c'est le script js pour la deconnexion et sont css en dessous //>
