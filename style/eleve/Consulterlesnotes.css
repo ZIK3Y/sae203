@@ -10,7 +10,7 @@ body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #DDEAD7;
+    background-color: #DDEAD7 !important;
 }
 
 header {
@@ -110,6 +110,8 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: #2E8B57;
+    border: none;
 }
 
 .matiere {
@@ -141,10 +143,11 @@ header {
 .binfo {
     background-color: white;
     border: 1px solid black;
-    padding: 20px;
+    padding: 5px;
     margin-top: 20px;
     width: 100%;
     text-align: center;
+    border-radius: 20px;
 }
 
 .binfo div {
@@ -159,11 +162,12 @@ header {
 
 .dinfo div {
     background-color: #f2f2f2;
-    padding: 10px;
+    padding: 5px;
     margin: 5px;
     width: 25%;
     text-align: center;
     border: 1px solid #ccc;
+    border-radius: 20px;
 }
 
 .VN {
@@ -196,4 +200,130 @@ form {
 
 canvas {
     max-width: 100%;
+}
+
+
+.Placementencadrement {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 15%;
+    box-sizing: border-box;
+    margin-top: 1%;
+    margin-bottom: 2%;
+}
+
+.BG{
+    flex: 1;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 0 1.5%;
+    padding-bottom: -20%;
+}
+
+
+.BD {
+    flex: 1;
+    background-color: #2E8B57;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 0 1.5%;
+    border-radius: 20px;
+    border: solid 4.3px rgb(8, 8, 8);
+}
+
+
+th {
+    background-color: #98FB98 !important;
+    text-transform: uppercase !important;
+}
+
+.accordion-item {
+    border: 1px solid #98FB98 !important;
+    border-radius: 5px !important;
+    margin-bottom: 10px !important;
+    background-color: #f9f9f9 !important;
+}
+
+.accordion-header {
+    background-color: #98FB98 !important;
+    color: #000000 !important;
+}
+
+.accordion-button {
+    background-color: #98FB98 !important;
+    color: #000000 !important;
+    text-decoration: none !important;
+    font-weight: bold !important;
+    padding: 10px !important;
+    border: none !important;
+    width: 100% !important;
+    text-align: left !important;
+}
+
+.accordion-button:hover {
+    background-color: #98FB98 !important;
+}
+
+.accordion-collapse {
+    border-top: none !important;
+    background-color: #ffffff !important;
+}
+
+.accordion-body {
+    padding: 20px !important;
+}
+
+.list-group-item {
+    border: none !important;
+    padding: 10px 0 !important;
+}
+
+.list-group-item a {
+    text-decoration: none !important;
+    color: #007bff !important;
+    font-weight: bold !important;
+}
+
+.list-group-item a:hover {
+    color: #0056b3 !important;
+    text-decoration: none !important;
+}
+
+.lien {
+    text-decoration: none !important;
+    color: #007bff !important;
+}
+
+.lien:hover {
+    text-decoration: underline !important;
+    color: #0056b3 !important;
+    text-decoration: none !important;
+}
+
+.Fonddéroulant {
+    background-color: #f0f0f0 !important;
+}
+
+.s{
+    background-color: #2E8B57;
+    padding: 20px;
+    border-radius: 20px;
+    border: solid 3.5px rgb(8, 8, 8);
+}
+
+.Taille{
+    font-size: large;
+}
+
+.Taille2{
+    font-size: 150%;
+}
+
+.Taille3{
+    font-size: 120%;
+}
+
+.Bordure2{
+    border: solid 2.6px rgb(8, 8, 8);
 }

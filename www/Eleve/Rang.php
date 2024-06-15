@@ -16,7 +16,7 @@
         </div>
         <div id="liste">
             <ul>
-                <li><a href="Consulterlesnotes.php" class="bouton-23">Consulter les Notes</a></li>
+                <li><a href="notes.php" class="bouton-23">Consulter les Notes</a></li>
                 <li><a href="UE.php" class="bouton-23">Voir les UE</a></li>
             </ul>
         </div>
