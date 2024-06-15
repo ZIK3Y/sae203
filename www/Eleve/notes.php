@@ -28,6 +28,22 @@ $reponseCount = count($resultatRessource);
 
 if($_SERVER['REQUEST_METHOD']==='GET') {
     $idEval = $_GET['id_eval'];
+
+    if (isset($idEval)) {
+        $requeteMoyenne = $conn->prepare('SELECT e.id_eval, p.id_promo, AVG(n.note) AS moyenne_notes 
+                                          FROM notes n 
+                                          JOIN etudiant et ON n.id_etud = et.id_etud 
+                                          JOIN eval e ON n.id_eval = e.id_eval 
+                                          JOIN ressource r ON e.id_ressource = r.id_ressource 
+                                          JOIN ue u ON r.ue = u.id_ue 
+                                          JOIN promotions p ON u.id_promo = p.id_promo 
+                                          WHERE e.id_eval = :id_eval 
+                                          GROUP BY e.id_eval, p.id_promo;');
+        $requeteMoyenne->bindParam(':id_eval', $idEval);
+        $requeteMoyenne->execute();
+
+        $resultatMoyenne = $requeteMoyenne->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
 
 ?>
@@ -91,7 +107,7 @@ if($_SERVER['REQUEST_METHOD']==='GET') {
                     </th>
                 </tr>
     <?php
-    $requeteNote = $conn->prepare('SELECT n.note FROM eval e JOIN notes n ON e.id_eval = n.id_eval JOIN etudiant etu ON n.id_etud = etu.id_etud WHERE e.id_eval = :id AND etu.id_etud = :etudiant');
+    $requeteNote = $conn->prepare('SELECT e.coeff, e.intitule, e.id_eval, n.note, r.intitule AS matiere FROM eval e JOIN notes n ON e.id_eval = n.id_eval JOIN etudiant etu ON n.id_etud = etu.id_etud JOIN ressource r ON e.id_ressource = r.id_ressource WHERE e.id_eval = :id AND etu.id_etud = :etudiant');
     $requeteNote->bindParam(':id', $idEval);
     $requeteNote->bindParam(':etudiant', $id);
     $requeteNote->execute();
@@ -109,6 +125,87 @@ if($_SERVER['REQUEST_METHOD']==='GET') {
     ?>
         </table>
     </div>
+
+    
+<div class="PD">
+  <div class="div11">
+    <form>
+      <canvas id="myChart" width="400" height="600"></canvas>
+    </form>
+    </div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <div class="binfo">
+            <div><?php echo $note['intitule']; ?></div>
+            <div>Votre Note : <span class="VN"><?php foreach($resultatNote as $note) { echo $note['note']; } ?></span></div>
+            <div>Moyenne de la classe : <span class="MC"><?php echo isset($resultatMoyenne[0]['moyenne_notes']) ? $resultatMoyenne[0]['moyenne_notes'] : 0; ?></span></div>
+            <div class="dinfo">
+                <div>
+                    <h3>Coef :</h3>
+                    <p><?php foreach($resultatNote as $coeff) { echo $coeff['coeff']; } ?></p>
+                </div>
+                <div><?php echo $note['matiere']; ?></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+  const ctx = document.getElementById('myChart').getContext('2d');
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['<?php echo $note['intitule']; ?>'],
+      datasets: [
+        {
+          label: 'Votre note',
+          data: [<?php echo $note['note'] ?>],
+          borderColor: '#36A2EB',
+          backgroundColor: '#DDEAD7',
+          barThickness: 60,
+        },
+        {
+          label: 'Moyenne de la classe',
+          data: [<?php echo isset($resultatMoyenne[0]['moyenne_notes']) ? $resultatMoyenne[0]['moyenne_notes'] : 0; ?>],
+          borderColor: '#FF6384',
+          backgroundColor: '#FFB1C1',
+          barThickness: 30,
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'top',
+        },
+        title: {
+          display: true,
+          text: 'Comparaison des Notes'
+        }
+      },
+      scales: {
+        x: {
+          stacked: false,
+        },
+        y: {
+          min: 0,
+          max: 20,
+          beginAtZero: true
+        }
+      },
+      layout: {
+        padding: {
+          left: 20,
+          right: 20,
+          top: 20,
+          bottom: 20
+        }
+      },
+      barPercentage: 0.5,
+      categoryPercentage: 0.5
+    }
+  });
+</script>
     
     
 </body>

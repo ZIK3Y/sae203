@@ -28,50 +28,14 @@
     </div>
 </header>
 
-<div class="C">
-    <div class="PG">
-        <div class="matiere" onclick="afficherDevoirs('devoirs1')">
-            Matière 1
-            <div class="devoirs" id="devoirs1">
-                <div class="devoir" onclick="mettreEnAvant(event)">Devoir 1</div>
-                <div class="devoir" onclick="mettreEnAvant(event)">Devoir 2</div>
-            </div>
-        </div>
-        <div class="matiere" onclick="afficherDevoirs('devoirs2')">
-            Matière 2
-            <div class="devoirs" id="devoirs2">
-                <div class="devoir" onclick="mettreEnAvant(event)">Devoir 1</div>
-                <div class="devoir" onclick="mettreEnAvant(event)">Devoir 2</div>
-            </div>
-        </div>
-        <div class="matiere" onclick="afficherDevoirs('devoirs3')">
-            Matière 3
-            <div class="devoirs" id="devoirs3">
-                <div class="devoir" onclick="mettreEnAvant(event)">Devoir 1</div>
-                <div class="devoir" onclick="mettreEnAvant(event)">Devoir 2</div>
-            </div>
-        </div>
-        <div class="matiere" onclick="afficherDevoirs('devoirs4')">
-            Matière 4
-            <div class="devoirs" id="devoirs4">
-                <div class="devoir" onclick="mettreEnAvant(event)">Devoir 1</div>
-                <div class="devoir" onclick="mettreEnAvant(event)">Devoir 2</div>
-            </div>
-        </div>
-        <div class="matiere" onclick="afficherDevoirs('devoirs5')">
-            Matière 5
-            <div class="devoirs" id="devoirs5">
-                <div class="devoir" onclick="mettreEnAvant(event)">Devoir 1</div>
-                <div class="devoir" onclick="mettreEnAvant(event)">Devoir 2</div>
-            </div>
-        </div>
-    </div>
-    <div class="PD">
-        <div class="div11">
+
+
+<div class="PD">
+  <div class="div11">
     <form>
-  <canvas id="myChart" width="400" height="600"></canvas>
-</form>
-</div>
+      <canvas id="myChart" width="400" height="600"></canvas>
+    </form>
+    </div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <div class="binfo">
             <div>Nom de la note</div>
